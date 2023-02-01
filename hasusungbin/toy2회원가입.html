@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style>
+        body{
+            margin: 0;
+        }
+        #main2{
+            width: 100%;
+            height: 2000px;
+            box-sizing: border-box;
+            /* background: black; */
+            /* opacity: 0.6; */
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        #loginForm{
+            width: 30%;
+            height: 800px;
+            background: white;
+            margin-top: 100px;
+            margin-left: 35%;
+            border-radius: 30px;
+            position: absolute;
+            z-index: 2;
+            box-shadow: 3px 3px 3px 2px; 
+        }
+
+        #loginEmailBar , #loginPwdBar{
+            width: 60%;
+            height: 7%;
+            box-sizing: border-box;
+            border: 2px solid lightgray;
+            border-radius: 11px;
+            margin-left: 20%;
+        }
+
+        #userEmail, #userPwd , #userPwd1{
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+        #userEmail:hover , #userPwd:hover {
+            outline : 5px solid skyblue;
+        }
+
+        #loginBar{
+            width: 60%;
+            height: 7%;
+            border-radius: 11px;
+            margin-left: 20%;
+            box-sizing: border-box;
+        }
+        #loginBar2{
+            width: 60%;
+            height: 7%;
+            border-radius: 11px;
+            margin-left: 20%;
+            box-sizing: border-box;
+        }
+
+        #loginBar3{
+            width: 60%;
+            height: 7%;
+            border-radius: 11px;
+            margin-left: 20%;
+            box-sizing: border-box;
+        }
+
+        #loginBtn{
+            width: 100%;
+            height: 80%;
+            border: none;
+            box-sizing: border-box;
+            background: red;
+            border-radius: 50px;
+            margin-top: 10%;
+            font-weight: bold;
+        }
+
+        #loginBtn:hover{
+            background-color: #ad081b;;
+        }
+
+        #and{
+            width: 100%;
+            height: 5%;
+            text-align: center;
+            margin-top: 7%;
+        }
+        #loginBtnFacebook{
+            width: 100%;
+            height: 80%;
+            border: none;
+            box-sizing: border-box;
+            background: blue;
+            border-radius: 50px;
+            z-index: 1;
+            /* position: absolute; */
+        }
+
+        #loginBtnFacebook:hover{
+            background: darkblue;
+        }
+
+        #bg{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 1500px;
+            background-color: black;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        #loginLogo{
+            color: red;
+            margin-left: 46%;
+            margin-top: 5%;
+        }
+        #loginBtnGoogle{
+            width: 100%;
+            height: 80%;
+            box-sizing: border-box;
+            background: white;
+            border-radius: 50px;
+            border: 0.7px solid gray;
+        }
+
+        #loginBtnGoogle:hover{
+            background: darkgrey;
+            color: white;
+        }
+
+        #loginFooter{
+            text-align: center;
+            font-size: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="login" type="button">가입하기</button>
+    <div id="main2">
+        <div id="bg"></div>
+        <div id="loginForm">
+            <div id="loginLogo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-pinterest" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"/>
+                </svg>
+            </div>
+            <div id="loginContent1">
+                <h2 style="text-align: center;">
+                    Pinterest에 오신것을<br>
+                    환영합니다.
+                </h2>
+            </div>
+            <p style="margin-left: 20%;">이메일</p>
+            <div id="loginEmailBar">
+                <input type="email" id="userEmail" placeholder="이메일을 입력하세요." required>
+            </div>
+            <p style="margin-left: 20%;">비밀번호</p>
+            <div id="loginPwdBar">
+                <input type="password" id="userPwd" placeholder="비밀번호를 입력하세요." required>
+            </div>
+            <p style="margin-left: 20%;">비밀번호 다시 입력하기</p>
+            <div id="loginPwdBar">
+                <input type="password" id="userPwd1" placeholder="비밀번호를 입력하세요." required>
+            </div>
+            <div id="loginBar">
+                <button type="button" id="loginBtn" style="color: white;" value="로그인">계속하기</button>
+            </div>
+            <div id="and">
+                <b>또는</b>
+            </div>
+            <div id="loginBar2">
+                <button type="button" id="loginBtnFacebook" style="color: white;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16" style="margin-top: 2%;">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                  </svg>
+                </button>
+            </div>
+            <div id="loginBar3">
+                <button type="submit" id="loginBtnGoogle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                        <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="loginFooter">
+                <p>
+                    계속 진행하면 Pinterest 서비스 약관 <a href="https://policy.pinterest.com/ko/terms-of-service">서비스 약관</a>에 동의하고<br>
+                    개인정보 보호정책; 새 탭이 열립니다을 읽었음을 인정하는 것으로 간주됩니다.<br>
+                    컬렉션 알림; 새 탭이 열립니다.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+<script>
+    $(function(){
+        $("#login").click(function(){
+            if($("#main2").css("display") === "none" ){
+                $("#main2").css("display","flex");
+            } else {
+                $("#main2").css("display","none");
+            };
+        });
+    });
+
+    $(function(){
+        $("#loginBtn").click(function(){
+            if($("#userEmail").val() === "" ){
+                alert("이메일을 입력하세요.");
+            } else if($("#userPwd").val() === ""){
+                alert("비밀번호를 입력하세요.")
+            } else if($("#userPwd1").val() === ""){
+                alert("비밀번호를 다시 한번 입력해 주세요.")
+            } else if($("#userPwd1").val() !== $("#userPwd").val()){
+                alert("비밀번호가 다릅니다. 다시 입력 해 주세요.")
+            } else if($("#userPwd1").val() === $("#userPwd").val()){
+                alert("회원가입 완료.")
+                window.open("file:///C:/kh-toyproject2/hasusungbin/toy2login.html") // 나중에 승은님 메인페이지의 주소 입력 해야함.
+            } 
+        })
+    })
+
+    $(function(){
+        $("#loginBtnFacebook").click(function(){
+            open("https://ko-kr.facebook.com/" ,"_blank")
+        })
+    })
+    // const greeting = document.querySelector("div");
+    // const yourName = localStorage.getItem(name);
+    // if (yourName === null) {
+    // const name = prompt("이름을 입력해주세요.");
+    // localStorage.setItem("name", name);
+    // greeting.innerHTML = `안녕하세요. ${name}`;
+    // } else {
+    // greeting.innerHTML = `안녕하세요. ${yourName}`;
+    // }
+
+</script>
+
+
+</body>
+</html>

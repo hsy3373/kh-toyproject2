@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3002/toy2회원가입.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3002/toy2회원가입.html"
+        }
+    ]
+}
