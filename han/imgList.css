@@ -1,0 +1,79 @@
+/* 
+
+  todo!
+
+  화면 사이즈별로 표시할 img-list 갯수 조정
+  ex 화면크기 700 이하에서는 3줄로 표시
+  그 외 5줄 표시 등
+
+
+*/
+
+/* ----------------------------- */
+
+/* 해당 이미지 로드 구역 모두를 감싸고 있는 섹션 */
+.sec-img-loading {
+  width: 100%;
+  height: max-content;
+}
+
+/* img-list-wrap : 이미지 리스트 모두를 감싸는, 해당 섹션 내 최상위 div */
+.img-list-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+/* 혹시 모를 간격값들 모두 0으로 세팅 및 높이 조절 */
+.img-list-wrap * {
+  margin: 0;
+  padding: 0;
+  height: max-content;
+}
+
+/* img-list : 각 한줄씩 이미지들을 가지게될 이미지 리스트 div */
+.img-list {
+  width: 22%;
+}
+
+/* loaded-img-div : 불러와진 이미지 하나를 감싸고 있는 div  */
+.loaded-img-div {
+  width: 100%;
+  height: max-content;
+  border-radius: 10px;
+  margin-top: 1vw;
+  overflow: hidden;
+}
+
+.loaded-img-div > img {
+  width: 100%;
+  border-radius: 10px;
+  opacity: 0;
+  top: 500px;
+}
+
+/* 이미지에 애니메이션 적용시 스크롤바 생기는 것을 방지 */
+.loaded-img-div::-webkit-scrollbar,
+.loaded-img-div > img::-webkit-scrollbar {
+  display: none;
+}
+
+/* 이미지 로드 완료시 적용될 애니메이션 */
+@keyframes transY {
+  0% {
+    transform: translateY(40%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* 이미지 로드 중 애니메이션 표시할 div */
+.loading-ani {
+  height: 100px;
+  width: 100%;
+}

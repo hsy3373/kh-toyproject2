@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <style>
+      .load-img {
+        width: 30vw;
+        height: auto;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      /* ---- post ---- */
+
+      .post {
+        background: #eee;
+        max-width: 1200px;
+      }
+
+      /* clearfix */
+      .post:after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+      /* ---- post-item ---- */
+
+      .post-sizer,
+      .post-item {
+        width: 20%;
+      }
+
+      .post-item {
+        height: 120px;
+        float: left;
+        background: #d26;
+        border: 2px solid #333;
+        border-color: hsla(0, 0%, 0%, 0.5);
+        border-radius: 5px;
+      }
+
+      .post-item--width2 {
+        width: 40%;
+      }
+      .post-item--width3 {
+        width: 60%;
+      }
+
+      .post-item--height2 {
+        height: 200px;
+      }
+      .post-item--height3 {
+        height: 260px;
+      }
+      .post-item--height4 {
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>API 연습용 사이트🥠</h1>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script> -->
+
+    <div>연습</div>
+
+    <div id="main-div"></div>
+
+    <div id="style-test">
+      <div class="container">
+        <article class="post">...</article>
+        <article class="post">...</article>
+        <article class="post">...</article>
+        ...
+      </div>
+      <div class="page-load-status">
+        <p class="infinite-scroll-request">Loading...</p>
+    </div>
+    <script>
+      $.ajax({
+        method: "GET",
+        url: "https://picsum.photos/v2/list?limit=5",
+      }).done(function (msg) {
+        console.log(msg);
+        goimg(msg);
+      });
+
+      let goimg = function (list) {
+        for (let item of list) {
+          console.log(list.length);
+          $("#main-div").append(
+            `<img src=${item.download_url} class="load-img post-item"></img>`
+          );
+        }
+      };
+
+      // -----------------------------------------------
+
+      $(".container").infiniteScroll({
+        // options
+        path: ".pagination__next",
+        append: ".post",
+        history: false,
+        elementScroll: '.sidebar'
+      });
+
+      // external js: masonry.pkgd.js
+
+      $(".post").masonry({
+        itemSelector: ".post-item",
+        columnWidth: ".post-sizer",
+        percentPosition: true,
+      });
+
+      $(".container").infiniteScroll({
+        // options
+        path: ".pagination__next",
+        append: ".post",
+        history: false,
+      });
+    </script>
+  </body>
+</html>
