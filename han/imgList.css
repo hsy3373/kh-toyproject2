@@ -2,7 +2,7 @@
 
   todo!
 
-  화면 사이즈별로 표시할 img-list 갯수 조정
+  화면 사이즈별로 표시할 imgList 갯수 조정
   ex 화면크기 700 이하에서는 3줄로 표시
   그 외 5줄 표시 등
 
@@ -11,14 +11,19 @@
 
 /* ----------------------------- */
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* 해당 이미지 로드 구역 모두를 감싸고 있는 섹션 */
-.sec-img-loading {
+.secImgLoading {
   width: 100%;
   height: max-content;
 }
 
 /* img-list-wrap : 이미지 리스트 모두를 감싸는, 해당 섹션 내 최상위 div */
-.img-list-wrap {
+.imgListWrap {
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -27,36 +32,39 @@
 }
 
 /* 혹시 모를 간격값들 모두 0으로 세팅 및 높이 조절 */
-.img-list-wrap * {
+.imgListWrap * {
   margin: 0;
   padding: 0;
   height: max-content;
 }
 
 /* img-list : 각 한줄씩 이미지들을 가지게될 이미지 리스트 div */
-.img-list {
+.imgList {
   width: 22%;
 }
 
-/* loaded-img-div : 불러와진 이미지 하나를 감싸고 있는 div  */
-.loaded-img-div {
+/* loadedImgDiv : 불러와진 이미지 하나를 감싸고 있는 div  */
+.loadedImgDiv {
   width: 100%;
   height: max-content;
   border-radius: 10px;
   margin-top: 1vw;
   overflow: hidden;
+  position: relative;
 }
 
-.loaded-img-div > img {
+.loadedImgDiv > Img {
   width: 100%;
   border-radius: 10px;
   opacity: 0;
   top: 500px;
+  margin: 0;
+  padding: 0;
 }
 
 /* 이미지에 애니메이션 적용시 스크롤바 생기는 것을 방지 */
-.loaded-img-div::-webkit-scrollbar,
-.loaded-img-div > img::-webkit-scrollbar {
+.loadedImgDiv::-webkit-scrollbar,
+.loadedImgDiv > img::-webkit-scrollbar {
   display: none;
 }
 
@@ -72,8 +80,181 @@
   }
 }
 
-/* 이미지 로드 중 애니메이션 표시할 div */
-.loading-ani {
-  height: 100px;
+/* 즐겨찾기 이미지 구역 */
+.favoriteDiv {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(17, 0, 255);
+  /* todo! 백그라운드 이미지 아이콘 넣기 */
+  /* background-image: url(); */
+  position: absolute;
+  bottom: 1em;
+  right: 1.5em;
+  opacity: 0;
+}
+
+/* ----------- 로딩 애니메이션 구현 영역-------------- */
+.loadingAni {
+  position: sticky;
+  bottom: -2%;
   width: 100%;
+  height: 20vh;
+  background-color: rgba(0, 0, 0, 0.336);
+  color: white;
+}
+
+:root {
+  /* 로딩용 원 사이즈 조정 */
+  --circleSize: 22px;
+  /* 로딩용 원 거리 조정 */
+  --circleDistance: 48px;
+}
+
+.loader10:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: calc(var(--circleDistance) * -1);
+  height: var(--circleSize);
+  width: var(--circleSize);
+  border-radius: var(--circleSize);
+  -webkit-animation: loader10g 3s ease-in-out infinite;
+  animation: loader10g 3s ease-in-out infinite;
+}
+
+.loader10 {
+  position: relative;
+  width: var(--circleSize);
+  height: var(--circleSize);
+  top: 46%;
+  left: 46%;
+  border-radius: var(--circleSize);
+  -webkit-animation: loader10m 3s ease-in-out infinite;
+  animation: loader10m 3s ease-in-out infinite;
+}
+
+.loader10:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: var(--circleDistance);
+  height: var(--circleSize);
+  width: var(--circleSize);
+  border-radius: var(--circleSize);
+  -webkit-animation: loader10d 3s ease-in-out infinite;
+  animation: loader10d 3s ease-in-out infinite;
+}
+
+@keyframes loader10 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360000deg);
+  }
+}
+
+@-webkit-keyframes loader10g {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+@keyframes loader10g {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@-webkit-keyframes loader10m {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+@keyframes loader10m {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@-webkit-keyframes loader10d {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+@keyframes loader10d {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 }

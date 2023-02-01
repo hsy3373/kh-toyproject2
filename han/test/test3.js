@@ -1,10 +1,10 @@
 let getImges = function (page, number) {
   $.ajax({
-    method: 'GET',
+    method: "GET",
     url: `https://picsum.photos/v2/list?page=${page}&limit=${number}`,
-    dataType: 'json',
+    dataType: "json",
     beforeSend: function () {
-      $('#loading').show();
+      $("#loading").show();
     },
   }).done(function (msg) {
     console.log(msg);
@@ -25,19 +25,36 @@ let getImges = function (page, number) {
 //   $('#loading').hide();
 // });
 
+// $.ajax({
+//   method: "GET",
+//   url: `https://api.unsplash.com/photos/random?count=5`,
+//   dataType: "json",
+//   beforeSend: function (xhr) {
+//     $("#loading").show();
+//     xhr.setRequestHeader(
+//       "Authorization",
+//       "Client-ID " + "8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k"
+//     );
+//   },
+// }).done(function (msg) {
+//   // $("#loading").hide();
+//   console.log(msg);
+//   goimg2(msg);
+// });
+
 $.ajax({
-  method: 'GET',
-  url: `https://api.unsplash.com/photos/random?count=15`,
-  dataType: 'json',
+  method: "GET",
+  url: `https://api.unsplash.com/photos/?client_id=8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k`,
+  dataType: "json",
   beforeSend: function (xhr) {
-    $('#loading').show();
+    $("#loading").show();
     xhr.setRequestHeader(
-      'Authorization',
-      'Client-ID ' + '8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k'
+      "Authorization",
+      "Client-ID " + "8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k"
     );
   },
 }).done(function (msg) {
-  $('#loading').hide();
+  // $("#loading").hide();
   console.log(msg);
   goimg2(msg);
 });
@@ -45,7 +62,7 @@ $.ajax({
 let goimg = function (list) {
   let int = -1;
   for (let item of list) {
-    if (int >= $('.grid').children().length) {
+    if (int >= $(".grid").children().length) {
       int = 0;
     } else {
       int++;
@@ -55,22 +72,22 @@ let goimg = function (list) {
   }
 
   $(`img[src="${$(list).get(-1).download_url}"]`).on(`load`, function () {
-    $('.loaded-img')
+    $(".loaded-img")
       .css({
-        animation: 'transY 2.5s forwards',
+        animation: "transY 2.5s forwards",
       })
       .delay(2600)
       .queue(function () {
-        $(this).removeClass('loaded-img');
+        $(this).removeClass("loaded-img");
       })
-      .css('opacity', 1);
+      .css("opacity", 1);
   });
 };
 
 let goimg2 = function (list) {
   let int = -1;
   for (let item of list) {
-    if (int >= $('.grid').children().length) {
+    if (int >= $(".grid").children().length) {
       int = 0;
     } else {
       int++;
@@ -81,29 +98,29 @@ let goimg2 = function (list) {
   }
 
   $(`img[src="${$(list).get(-1).urls.regular}"]`).on(`load`, function () {
-    $('.ani-test')
+    $(".ani-test")
       .css({
-        animation: 'transY 2.5s forwards',
+        animation: "transY 2.5s forwards",
       })
       .delay(2600)
       .queue(function () {
-        $(this).removeClass('ani-test');
+        $(this).removeClass("ani-test");
       })
-      .css('opacity', 1);
+      .css("opacity", 1);
   });
 };
 
-const loader = $('.loader');
-const html = $('html');
+const loader = $(".loader");
+const html = $("html");
 
-html.css({ overflow: 'hidden' }); //로딩 중 스크롤 방지
+html.css({ overflow: "hidden" }); //로딩 중 스크롤 방지
 
-$(window).on('load', () => {
+$(window).on("load", () => {
   setTimeout(() => {
     //  <-* 로딩속도 구현
 
     loader.fadeOut(300);
-    html.css({ overflow: 'auto' }); //스크롤 방지 해제
+    html.css({ overflow: "auto" }); //스크롤 방지 해제
   }, 2000); //  <-* 로딩속도 구현
 });
 
