@@ -21,11 +21,6 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
     <style>
-      div {
-        border: 1px solid red;
-        height: 100px;
-        width: 100%;
-      }
       #test-wrap,
       #test {
         width: 100%;
@@ -35,14 +30,31 @@
       }
 
       #img-div {
-        width: 50%;
-        height: 500px;
-        background-color: rebeccapurple;
+        width: 70vw;
+        max-height: 80vh;
+        margin: auto;
+        text-align: center;
       }
+
+      .test-img {
+        max-width: 100%;
+        max-height: 80vh;
+        margin: auto;
+      }
+
       #test-item {
-        width: 40%;
+        width: 30%;
         height: 100%;
         background-color: aqua;
+      }
+
+      .modal-dialog {
+        max-width: 80vw;
+      }
+
+      #imgAuthor {
+        font-size: x-large;
+        font-weight: 600;
       }
     </style>
   </head>
@@ -50,13 +62,23 @@
   <body>
     <div id="test-wrap" style="height: auto">
       <div id="test">
-        <div id="img-div"></div>
-        <div id="test-item"></div>
+        <div id="test-item">
+          <!-- <div id="imgAuthor">author: Alejandro Escamilla</div>
+          <div id="imgUrl">url:https://picsum.photos/id/0/5000/3333</div>
+          <div id="imgHeight">height: 3333</div>
+          <div id="imgWidth">width: 5000</div>
+          <div id="imgFavorite">즐겨찾기구역</div> -->
+        </div>
       </div>
     </div>
 
+    <a href="https://picsum.photos/id/14/2500/1667" download
+      ><button type="button">다운 테스트</button></a
+    >
+
     <!-- Button trigger modal -->
     <button
+      id="testBtn"
       type="button"
       class="btn btn-primary"
       data-toggle="modal"
@@ -73,36 +95,26 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div id="test-wrap" style="height: auto">
-              <div id="test">
-                <div id="img-div"></div>
-                <div id="test-item"></div>
-              </div>
+            <h5 class="modal-title" id="imgAuthor"></h5>
+            <div>
+              <button id="modalFavorite">하트</button>
+              <button id="modalShare">공유</button>
+              <button id="modalDown">다운로드</button>
             </div>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+          <div class="modal-body">
+            <div id="img-div"></div>
           </div>
         </div>
       </div>
