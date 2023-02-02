@@ -6,134 +6,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
     <style>
-      .load-img {
-        width: 30vw;
+      #test-wrap,
+      #test {
+        width: 100%;
         height: auto;
+        display: flex;
+        flex-direction: row;
       }
 
-      * {
-        box-sizing: border-box;
+      #img-div {
+        width: 70vw;
+        max-height: 80vh;
+        margin: auto;
+        text-align: center;
       }
 
-      body {
-        font-family: sans-serif;
+      .test-img {
+        max-width: 100%;
+        max-height: 80vh;
+        margin: auto;
       }
 
-      /* ---- post ---- */
-
-      .post {
-        background: #eee;
-        max-width: 1200px;
+      #test-item {
+        width: 30%;
+        height: 100%;
+        background-color: aqua;
       }
 
-      /* clearfix */
-      .post:after {
-        content: "";
-        display: block;
-        clear: both;
+      .modal-dialog {
+        max-width: 80vw;
       }
 
-      /* ---- post-item ---- */
-
-      .post-sizer,
-      .post-item {
-        width: 20%;
-      }
-
-      .post-item {
-        height: 120px;
-        float: left;
-        background: #d26;
-        border: 2px solid #333;
-        border-color: hsla(0, 0%, 0%, 0.5);
-        border-radius: 5px;
-      }
-
-      .post-item--width2 {
-        width: 40%;
-      }
-      .post-item--width3 {
-        width: 60%;
-      }
-
-      .post-item--height2 {
-        height: 200px;
-      }
-      .post-item--height3 {
-        height: 260px;
-      }
-      .post-item--height4 {
-        height: 360px;
+      #imgAuthor {
+        font-size: x-large;
+        font-weight: 600;
       }
     </style>
   </head>
+
   <body>
-    <h1>API 연습용 사이트🥠</h1>
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script> -->
-
-    <div>연습</div>
-
-    <div id="main-div"></div>
-
-    <div id="style-test">
-      <div class="container">
-        <article class="post">...</article>
-        <article class="post">...</article>
-        <article class="post">...</article>
-        ...
+    <div id="test-wrap" style="height: auto">
+      <div id="test">
+        <div id="test-item">
+          <!-- <div id="imgAuthor">author: Alejandro Escamilla</div>
+          <div id="imgUrl">url:https://picsum.photos/id/0/5000/3333</div>
+          <div id="imgHeight">height: 3333</div>
+          <div id="imgWidth">width: 5000</div>
+          <div id="imgFavorite">즐겨찾기구역</div> -->
+        </div>
       </div>
-      <div class="page-load-status">
-        <p class="infinite-scroll-request">Loading...</p>
     </div>
-    <script>
-      $.ajax({
-        method: "GET",
-        url: "https://picsum.photos/v2/list?limit=5",
-      }).done(function (msg) {
-        console.log(msg);
-        goimg(msg);
-      });
 
-      let goimg = function (list) {
-        for (let item of list) {
-          console.log(list.length);
-          $("#main-div").append(
-            `<img src=${item.download_url} class="load-img post-item"></img>`
-          );
-        }
-      };
+    <a href="https://picsum.photos/id/14/2500/1667" download
+      ><button type="button">다운 테스트</button></a
+    >
 
-      // -----------------------------------------------
+    <!-- Button trigger modal -->
+    <button
+      id="testBtn"
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >
+      Launch demo modal
+    </button>
 
-      $(".container").infiniteScroll({
-        // options
-        path: ".pagination__next",
-        append: ".post",
-        history: false,
-        elementScroll: '.sidebar'
-      });
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imgAuthor"></h5>
+            <div>
+              <button id="modalFavorite">하트</button>
+              <button id="modalShare">공유</button>
+              <button id="modalDown">다운로드</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div id="img-div"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      // external js: masonry.pkgd.js
+    <!-- /* 위쪽으로 페이드 효과 */ -->
+    <div data-aos="fade-up">1</div>
 
-      $(".post").masonry({
-        itemSelector: ".post-item",
-        columnWidth: ".post-sizer",
-        percentPosition: true,
-      });
+    <!-- /* 아래쪽으로 페이드 효과 */ -->
+    <div data-aos="fade-down">2</div>
 
-      $(".container").infiniteScroll({
-        // options
-        path: ".pagination__next",
-        append: ".post",
-        history: false,
-      });
-    </script>
+    <!-- /* 오른쪽으로 페이드 효과 */ -->
+    <div data-aos="fade-right">3</div>
+
+    <!-- /* 왼쪽으로 페이드 효과 */ -->
+    <div data-aos="fade-left">4</div>
+
+    <!-- /* 왼쪽으로 플립 효과 */ -->
+    <div data-aos="flip-left">5</div>
+
+    <div data-aos="flip-right">6</div>
+
+    <div data-aos="flip-up">7</div>
+
+    <div data-aos="flip-down">8</div>
+
+    <div data-aos="zoom-in">9</div>
+
+    <script src="../test/test.js"></script>
   </body>
 </html>
