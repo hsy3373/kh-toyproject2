@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+
+    <input type="text" id="userEmail" value="">
+    <button type="submit" id="login">로그인</button>
+
+
+
+<script type="">
+
+    
+    $(function(){
+        $("#login").click(function(){
+            let userEmail = document.getElementById("userEmail").value;  //= $("#userEmail").val();
+            console.log(userEmail);
+            localStorage.setItem("email", JSON.stringify(userEmail));
+
+            // let userEmail = document.getElementById("userEmail").value;
+            // if(userEmail){
+            //     alert("로그인 되었습니다.")
+            // } else {
+            //     alert("아이디가 다릅니다.")
+            // }
+            
+            // let user = JSON.parse(localStorage.getItem("userEmail"));
+            // localStorage.setItem("userEmail", JSON.stringify(userEmail));
+            
+            // if(user){
+                //     console.log("ulist 있음",user);
+                //     user
+                //     // console.log(ulist);
+                // } else {
+                    //     console.log("ulist 없음",user);
+            // }
+            // console.log(userList);
+            // ulist.userEmail.id = $("#userEmail").val()
+
+            
+        })
+    })
+
+
+
+
+    
+    // console.log(ulist);
+
+    // $(function(){
+    //     $("#login").click(function(){
+    //         if(userList !== null ){
+    //             console.log(ulist)
+    //         }
+            
+    //         console.log(ulist);
+            
+    //     })
+    // })
+
+    
+
+    // ulist.userEmail = 0000;
+    // console.log(ulist);
+
+    // localStorage.setItem("userList", JSON.stringify(ulist));
+
+    // console.log(ulist);
+
+
+
+
+    // function()
+
+    // // 더미 user 객체
+
+    // let userList = {
+    // // 유저 아이디
+    // dbw: {
+    //     id: "dbw",
+    //     pwd: "pwd1",
+    //     favorite: [
+    //     { type: "picsum", id: "1" },
+    //     { type: "picsum", id: "2" },
+    //     { type: "unsplash", id: "j34IJcOtv9w" },
+    //     ],
+    // },
+    // userId2: {
+    //     id: "userId2",
+    //     pwd: "pwd2",
+    //     favorite: [{ type: "picsum", id: "23" }],
+    // },
+    // "변수" : {
+    //     id: "dbw",
+    //     pwd: "pwd1",
+    // }
+    // };
+    // // 현재 로그인 된 유저
+    // let currentUser = "userId1";
+
+    
+
+    /*
+
+    update  비번 바꾸기 즐겨찾기 바꾸기 등등
+
+    1.불러오기
+    let ulist = JSON.parse(localStorage.getItem("userList"));
+
+
+    ulist.userId1.pwd = "바뀐 비번";
+
+
+    ..
+    .
+    .
+
+    localStorage.setItem("userList", JSON.stringify(ulist));
+
+
+    */// 더미 user 객체
+
+    // let userList = {
+    // // 유저 아이디
+    // dbw: {
+    //     id: "dbw",
+    //     pwd: "pwd1",
+    //     favorite: [
+    //     { type: "picsum", id: "1" },
+    //     { type: "picsum", id: "2" },
+    //     { type: "unsplash", id: "j34IJcOtv9w" },
+    //     ],
+    // },
+    // userId2: {
+    //     id: "userId2",
+    //     pwd: "pwd2",
+    //     favorite: [{ type: "picsum", id: "23" }],
+    // },
+    // "변수" : {
+    //     id: "dbw",
+    //     pwd: "pwd1",
+    // }
+    // };
+    // // 현재 로그인 된 유저
+    // let currentUser = "userId1";   
+
+    // console.log(userList);
+
+
+    // /*
+
+    // update  비번 바꾸기 즐겨찾기 바꾸기 등등
+
+    // 1.불러오기
+    // let ulist = JSON.parse(localStorage.getItem("userList"));
+
+
+    // ulist.userId1.pwd = "바뀐 비번";
+
+
+    // ..
+    // .
+    // .
+
+    // localStorage.setItem("userList", JSON.stringify(ulist));
+
+
+    // */
+
+</script>
+
+</body>
+</html>
