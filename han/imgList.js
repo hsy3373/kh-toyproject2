@@ -270,14 +270,16 @@ let getOneImgeUnsplash = function (id) {
     console.log(id, msg);
     $("#imgAuthor").text(msg.user.first_name + " " + msg.user.last_name);
     $(".innerImgModal").attr("src", msg.urls.regular);
+    $("#shareText").text(msg.urls.regular);
   });
 
   $("#exampleModal").modal("show");
 };
 
-// ---------------------이미지 개별 클릭 이벤트--------------
+// ---------------------이미지 개별 클릭 이벤트 할당 구역--------------
 
 // 이미지 클릭 시 아이디 값 가져와서 해당 사이트에서 아이디값으로 검색 가능함
+// picsum용, unsplash용 각각 나눔
 $(document).on("click", ".picsum", function () {
   $(".innerImgModal").attr("src", "");
   getOneImgePicsum($(this).attr("id"));
@@ -288,29 +290,37 @@ $(document).on("click", ".unsplash", function () {
   getOneImgeUnsplash($(this).attr("id"));
 });
 
+// 모달창의 즐겨찾기 버튼 이벤트
 $(document).on("click", ".favoriteDiv", function () {
   // todo! 즐겨찾기 추가
   console.log("즐겨찾기 추가");
 });
 
-//  모달창의 다운로드 버튼 이벤트 구현
-// todo! 다운로드 중일때 로딩중 표시
+//  모달창의 다운로드 버튼 이벤트
 $("#modalDown").on("click", function () {
+  // 안쪽 이미지 url을 파일로 다운로드
   downloadPic($(".innerImgModal").attr("src"));
 });
 
+// 모달창의 공유 버튼 이벤트 (이미지 url 클립보드에 복사)
 $("#modalShare").on("click", function () {
-  console.log("url 복사");
+  // Clipboard API 를 사용하는 것으로 비동기로 복사를 수행하고 Promise를 반환하게 된다
+  // 다만 localhost, https 환경에서만 동작한다 -> 에러 처리 위해 try로 감쌈
   try {
-    $("#shareText").select();
-    document.execCommand("Copy"); //복사
-    toast();
+    // writeText()의 인자로 넣은 텍스트가 복사된다.
+    window.navigator.clipboard.writeText($("#shareText").text()).then(() => {
+      // 복사가 완료되면 이 부분이 호출된다.
+      $("#toast").text("클립보드로 복사되었습니다");
+      toast();
+    });
   } catch (err) {
-    alert("이 브라우저는 지원하지 않습니다.");
     console.log(err);
+    $("#toast").text("복사에 실패하였습니다");
+    toast();
   }
 });
 
+// 이미지들 마우스 오버 관련 이벤트 (이미지 상 즐겨찾기 영역 표시용)
 $(document).on("mouseover", ".loadedImgDiv", function (e) {
   $(this).children("div").css("opacity", 1);
 });
@@ -349,43 +359,6 @@ $(window).on("load", () => {
     init();
   }, 2000); //  <-* 로딩속도 구현
 });
-
-// ---------------- 로컬 스토리지와 연동 구역 -------------------
-
-// user 객체
-
-// let userList = {
-//   userId1: {
-//     id: "userId1",
-//     pwd: "pwd1",
-//     favorite: [
-//       { type: "picsum", id: "id" },
-//       { type: "picsum", id: "id" },
-//       { type: "unsplash", id: "id" },
-//     ],
-//   },
-//   userId2: {},
-// };
-// let currentUser = "userId";
-
-// ----------------------
-/*
-
-// 키에 데이터 쓰기
-localStorage.setItem("key", value);
-
-// 키로 부터 데이터 읽기
-localStorage.getItem("key");
-
-// 키의 데이터 삭제
-localStorage.removeItem("key");
-
-// 모든 키의 데이터 삭제
-localStorage.clear();
-
-// 저장된 키/값 쌍의 개수
-localStorage.length
-*/
 
 // --------------------------------------------------------------
 // url 넣으면 해당 파일 다운로드 됨
