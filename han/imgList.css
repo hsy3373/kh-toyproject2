@@ -46,12 +46,14 @@ body {
 
 /* loadedImgDiv : 불러와진 이미지 하나를 감싸고 있는 div  */
 .loadedImgDiv {
+  cursor: pointer;
   width: 100%;
   height: max-content;
   border-radius: 10px;
   margin-top: 1vw;
   overflow: hidden;
   position: relative;
+  filter: drop-shadow(2px 2px 2px #00000086); /*그림자*/
 }
 
 .loadedImgDiv > Img {
@@ -61,6 +63,16 @@ body {
   top: 500px;
   margin: 0;
   padding: 0;
+}
+
+@keyframes sss {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+    transition: ;
+  }
 }
 
 /* 이미지에 애니메이션 적용시 스크롤바 생기는 것을 방지 */
@@ -83,15 +95,25 @@ body {
 
 /* 즐겨찾기 이미지 구역 */
 .favoriteDiv {
-  width: 50px;
-  height: 50px;
-  background-color: rgb(17, 0, 255);
-  /* todo! 백그라운드 이미지 아이콘 넣기 */
-  /* background-image: url(); */
+  cursor: pointer;
+  width: 4vw;
+  height: 4vw;
+  background: url(./resources/img/shape.png) no-repeat center;
+  background-size: cover;
+  background-color: #ffffff1e;
+  filter: drop-shadow(0px 0px 4px #ffffff6b); /*그림자*/
+  border-radius: 50%;
   position: absolute;
-  bottom: 1em;
-  right: 1.5em;
+  bottom: 1vw;
+  right: 1.5vw;
   opacity: 0;
+}
+
+.favoriteDiv:active {
+  width: 3.5vw;
+  height: 3.5vw;
+  bottom: 1.2vw;
+  right: 1.7vw;
 }
 
 /* ----------- 로딩 애니메이션 구현 영역-------------- */
@@ -112,7 +134,7 @@ body {
 }
 
 .loader10:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0px;
   left: calc(var(--circleDistance) * -1);
@@ -135,7 +157,7 @@ body {
 }
 
 .loader10:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0px;
   left: var(--circleDistance);
@@ -285,6 +307,43 @@ body {
   margin: auto;
 }
 
+/* ---------------모달 메뉴들 스타일 영역----------- */
+
+#modalMenu {
+  display: flex;
+  align-items: center;
+}
+
+#modalMenu * {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#modalMenu *:hover {
+  filter: drop-shadow(0 0 2px rgb(175, 175, 175));
+}
+
+#modalFavorite {
+  width: 2.5em;
+  height: 2.5em;
+  background: url(./resources/img/shape.png) no-repeat center;
+  background-size: cover;
+}
+
+#modalShare {
+  margin: 0 1em;
+  width: 2em;
+  height: 2em;
+  background: url(./resources/img/share.png) no-repeat center;
+  background-size: cover;
+}
+
+#modalDown {
+  width: 2.5em;
+  height: 2.5em;
+  background: url(./resources/img/download2.png) no-repeat center;
+  background-size: cover;
+}
 /* -------------------toast 알림 구역----------------------- */
 
 #toast {
@@ -296,7 +355,7 @@ body {
   transform: translateX(-50%);
   min-width: 100px;
   border-radius: 25px;
-  background-color: #00000094;
+  background-color: #000000a4;
   color: #ffffff;
   padding: 15px 25px;
 }

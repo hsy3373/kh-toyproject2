@@ -49,15 +49,16 @@
         <div class="modal-dialog modal-dialog-centered" style="max-width: 70vw">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="imgAuthor"></h5>
-              <div>
-                <button id="modalFavorite">하트</button>
-                <button id="modalShare">공유</button>
-                <button id="modalDown">다운로드</button>
+              <h4 class="modal-title" id="imgAuthor"></h4>
+              <div id="modalMenu">
+                <div id="modalFavorite"></div>
+                <div id="modalShare"></div>
+                <div id="modalDown"></div>
               </div>
             </div>
             <div class="modal-body">
               <div id="modalImg">
+                <div class="innerImgInfo"></div>
                 <img class="innerImgModal" />
               </div>
             </div>
@@ -65,10 +66,10 @@
         </div>
       </div>
 
-      <input
+      <textarea
         id="shareText"
         style="opacity: 0; position: absolute; bottom: 0"
-      ></input>
+      ></textarea>
       <div id="toast">알림</div>
     </section>
 
