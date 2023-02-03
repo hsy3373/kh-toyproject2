@@ -11,9 +11,9 @@
             width: 100%;
             height: 100vh;
         }
-        div{
+        /* div{
             border: 1px solid red;
-        }
+        } */
         #header{
             width: 100%;
             height: 10%;
@@ -52,21 +52,11 @@
             /* float: right; */
             margin-left: 5px;
         }
-        /* #da{
-           padding-top: 30px;
-        }
-        #da>a{
-            font-size: 16px;
-            text-decoration: none;
-            color: black;
-            border: 900;
-            margin-left: 20px;
-        } */
         #welcome{
             display: inline-flex;
         }
-        #welcome>h4{
-            text-align: center;
+        #wel{
+            margin-left: 30px;
         }
         #logo{
             margin-left: 5px;
@@ -93,14 +83,31 @@
             width: 25%;
             height: 100%;
             cursor: pointer;
-            /* background-color: lightgray;
-            border-radius: 20% 20% 0% 0%; */
+        }
+        .categoryName>h4{
+            text-align: center;
+            font-weight: bolder;
+            font-size: 30px;
+            margin-top: 30px;
+            margin-bottom: 0;
         }
 
         /* 콘텐츠부분 */
+        /* default 값으로 모든 콘텐츠를 선택한 화면이 보이기 위해서
+            카테고리를 클릭하기 이전에는 모든 콘텐츠 영역의 배경색이 회색임
+            */
         #content{
             width: 100%;
-            height: auto;
+            height: 90%;
+            background-color: gainsboro;
+        }
+        #c0{
+            /* margin-top: 30px; */
+            background-color: gainsboro;
+            border-radius: 100% 90% 0% 0%;
+            color: white;
+            font-weight: bolder;
+            font-size: 30px;
         }
     </style>
 </head>
@@ -115,21 +122,21 @@
                 <button id="star">즐겨찾기</button>
             </div>
             <div class="categoryWrap header">
-                <div class="categoryName" id="c1">
+                <div class="categoryName" id="c0">
                     <h4>모든 콘텐츠</h4>
                 </div>
-                <div class="categoryName" id="c2">
+                <div class="categoryName" id="c1">
                     <h4>카테고리1</h4>
                 </div>
-                <div class="categoryName" id="c3">
+                <div class="categoryName" id="c2">
                     <h4>카테고리2</h4>
                 </div>
-                <div class="categoryName" id="c4">
+                <div class="categoryName" id="c3">
                     <h4>카테고리3</h4>
                 </div>
             </div>
             <div id="welcome">
-                <h4>환영합니다!&nbsp</h4>  <h4>userId님</h4>
+                <h4 id="wel">환영합니다!&nbsp</h4>  <h4>userId님</h4>
             </div>
             <div id="hb" class="header">
                 <!-- <button id="hb1" type="button">로그인</button> -->
@@ -140,8 +147,6 @@
     </div>
 
     <script>
-        // JSON.parse(localStorage.getItem("cast"));
-
         $("#logo").on({
             "click": function(){
                 $("#la>img").css({"width":"27px", "height":"auto"});
@@ -149,17 +154,25 @@
             }
         });
 
-        // $("#c1").on({
-        //     "click": function(){
-        //         $(this).css({"background-color":"lightgray", "border-radius":"20% 20% 0% 0%"});
-        //     }
-        // });
+        // 카테고리 선택될때마다 색부여(회색)
+        $(".categoryName").click(function(){
+            $(this).css({"background-color":"gainsboro", "border-radius":"100% 90% 0% 0%", "color":"white"});
+            $("#content").css("background-color", "gainsboro");
+            var notClicked = $(".categoryName").not(this);
+            notClicked.css({"background-color":"white", "color":"black", });
+        });
     </script>
 
     <script>
         // 버튼 호버
+        $("#star").hover(function(){
+                $(this).css("background-color", "#ad081b");
+            } , function(){
+                $(this).css("background-color", "#f51f1f");
+        });
+
         $(function(){
-             $("#star, #hb2").hover(function(){
+             $("#hb2").hover(function(){
                  $(this).css("backgroundColor", "#d0d0d0");
              },  function(){
                  $(this).css("backgroundColor", "#f0f0f0");
