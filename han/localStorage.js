@@ -23,40 +23,40 @@ localStorage.length
 let userList = {
   // 유저 아이디를 키값으로 씀
   userId1: {
-    id: 'userId1',
-    pwd: 'pwd1',
+    id: "userId1",
+    pwd: "pwd1",
     favorite: {
-      1: { type: 'picsum', id: '1' },
-      2: { type: 'picsum', id: '2' },
-      j34IJcOtv9w: { type: 'unsplash', id: 'j34IJcOtv9w' },
+      1: { type: "picsum", id: "1" },
+      2: { type: "picsum", id: "2" },
+      j34IJcOtv9w: { type: "unsplash", id: "j34IJcOtv9w" },
     },
   },
   userId2: {
-    id: 'userId2',
-    pwd: 'pwd2',
-    favorite: [{ type: 'picsum', id: '23' }],
+    id: "userId2",
+    pwd: "pwd2",
+    favorite: [{ type: "picsum", id: "23" }],
   },
   dbw: {
-    id: 'dbw',
-    pwd: 'pwd1',
+    id: "dbw",
+    pwd: "pwd1",
   },
   test: { favorite: {} },
 };
 
 // 현재 로그인 된 유저 더미
-let currentUser = 'userId1';
+let currentUser = "userId1";
 
 // JSON 형태로 파싱해주지 않으면 string 형태로 데이터가 오고가기 때문에
 // 원할한 사용을 위해 꼭 파싱 필요
-localStorage.setItem('userList', JSON.stringify(userList));
-localStorage.setItem('currentUser', JSON.stringify(currentUser));
+localStorage.setItem("userList", JSON.stringify(userList));
+localStorage.setItem("currentUser", JSON.stringify(currentUser));
 // 모달창 안의 즐겨찾기 버튼에 이벤트 부여
-$('#modalFavorite').on('click', function () {
-  favorAdd($('.innerImgModal'));
+$("#modalFavorite").on("click", function () {
+  favorAdd($(".innerImgModal"));
 });
 
 // 모달창의 즐겨찾기 버튼 이벤트
-$(document).on('click', '.favoriteDiv', function () {
+$(document).on("click", ".favoriteDiv", function () {
   favorAdd($(this).prev());
 });
 
@@ -69,44 +69,46 @@ $(document).on('click', '.favoriteDiv', function () {
 
 // toast 메세지 띄우는 메서드
 let favorToast = function (text) {
-  $('#toast').text(text);
-  if ($('.toastShow').length > 0) return; // 토스트 메세지 show 중이면 다시 뜨지 않도록 처리
-  $('#toast').addClass('toastShow'); // show라는 클래스를 추가해서 토스트 메시지를 띄우는 애니메이션을 발동시킴
+  $("#toast").text(text);
+  if ($(".toastShow").length > 0) return; // 토스트 메세지 show 중이면 다시 뜨지 않도록 처리
+  $("#toast").addClass("toastShow"); // show라는 클래스를 추가해서 토스트 메시지를 띄우는 애니메이션을 발동시킴
   setTimeout(function () {
     // 2700ms 후에 show 클래스를 제거함
-    $('#toast').removeClass('toastShow');
+    $("#toast").removeClass("toastShow");
   }, 2700);
 };
 
+// 즐겨찾기 추가 메서드
 let favorAdd = function (img) {
-  let imgClass = '';
-  let imgId = img.attr('id');
-  if (img.hasClass('picsum')) {
-    imgClass = 'picsum';
+  let imgClass = "";
+  let imgId = img.attr("id");
+  if (img.hasClass("picsum")) {
+    imgClass = "picsum";
   } else {
-    imgClass = 'unsplash';
+    imgClass = "unsplash";
   }
 
-  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+  let cUser = JSON.parse(localStorage.getItem("currentUser"));
 
   // 자바스크립트 자료형에서 "", null, undefined, 0, NaN을 조건식에 넣으면 false로 반환됨
   //  currentUser가 비었는지 확인
   if (cUser) {
-    let uList = JSON.parse(localStorage.getItem('userList'));
+    let uList = JSON.parse(localStorage.getItem("userList"));
 
     // 만약 유저리스트 안에 currentUser 아이디 값이 없을 경우를 대비
     if (uList[cUser]) {
       uList[cUser].favorite[imgId] = {
         type: imgClass,
         id: imgId,
+        link: img.attr("src"),
       };
-      localStorage.setItem('userList', JSON.stringify(uList));
-      favorToast('즐겨찾기에 추가되었습니다');
+      localStorage.setItem("userList", JSON.stringify(uList));
+      favorToast("즐겨찾기에 추가되었습니다");
     } else {
-      favorToast('유저 정보 없음. 다시 로그인해주세요');
-      localStorage.removeItem('currentUser');
+      favorToast("유저 정보 없음. 다시 로그인해주세요");
+      localStorage.removeItem("currentUser");
     }
   } else {
-    favorToast('로그인 후 사용 가능합니다');
+    favorToast("로그인 후 사용 가능합니다");
   }
 };

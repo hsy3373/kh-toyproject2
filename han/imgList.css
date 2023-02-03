@@ -110,10 +110,10 @@ body {
 }
 
 .favoriteDiv:active {
-  width: 3.5vw;
-  height: 3.5vw;
-  bottom: 1.2vw;
-  right: 1.7vw;
+  width: 3.7vw;
+  height: 3.7vw;
+  bottom: 1.1vw;
+  right: 1.6vw;
 }
 
 /* ----------- 로딩 애니메이션 구현 영역-------------- */
@@ -134,7 +134,7 @@ body {
 }
 
 .loader10:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0px;
   left: calc(var(--circleDistance) * -1);
@@ -157,7 +157,7 @@ body {
 }
 
 .loader10:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0px;
   left: var(--circleDistance);
@@ -320,7 +320,7 @@ body {
 }
 
 #modalMenu *:hover {
-  filter: drop-shadow(0 0 2px rgb(175, 175, 175));
+  filter: drop-shadow(0 0 2px rgba(175, 175, 175, 0.897));
 }
 
 #modalFavorite {

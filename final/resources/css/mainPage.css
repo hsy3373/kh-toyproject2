@@ -1,0 +1,300 @@
+/* ---------------메인 화면 css 구역------------------------ */
+
+.slickSlide {
+  width: 100%;
+  height: 100vh;
+  /* border: 5px solid blue; */
+}
+.slick-list {
+  width: 100%;
+  height: 100% !important;
+  box-sizing: border-box;
+  /* border: 5px solid blue; */
+}
+.slick-track {
+  height: auto;
+}
+/* div{
+            border: 1px solid red;
+        } */
+#header {
+  width: 100%;
+  height: 10%;
+  display: grid;
+  grid-template-columns: 8% 65% 15% 12%;
+}
+
+#star,
+#hb1,
+#hb2 {
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 900;
+}
+#star,
+#hb2 {
+  width: 100px;
+}
+#hb2 {
+  background-color: #f0f0f0;
+  color: black;
+}
+#hb1 {
+  width: 80px;
+}
+#star,
+#hb1 {
+  background-color: #f51f1f;
+  color: white;
+}
+.header {
+  padding-top: 15px;
+}
+#textLogo {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0px 0px;
+  /* float: right; */
+  margin-left: 5px;
+}
+#da {
+  padding-top: 30px;
+}
+#da > a {
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+  border: 900;
+  margin-left: 20px;
+}
+#logo {
+  margin-left: 5px;
+  /* display: inline-flex; */
+}
+#logo > a {
+  text-decoration: none;
+  color: #cc0000;
+}
+#header button {
+  cursor: pointer;
+}
+#la {
+  width: 100%;
+  display: flex;
+}
+
+/* .dots{
+            width: '100%';
+                    position: 'absolute';
+                    bottom: '24px';
+                    display: 'flex';
+                    alignItems: 'center';
+                    justifyContent: 'center;
+        }*/
+.slick-dots {
+  display: inline-flex;
+  /* margin-left: 50%;
+            margin-top: 380px; */
+  position: absolute;
+  bottom: 0;
+}
+
+#content {
+  width: 100%;
+  height: 70%;
+}
+.prevArrow,
+.nextArrow {
+  width: 10px;
+  height: 20px;
+  margin: auto;
+  cursor: pointer;
+}
+#downImg {
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  margin-left: 5px;
+}
+#content1 {
+  /* margin-left: 5px; */
+  height: 20%;
+}
+#content1 > h4 {
+  text-align: center;
+  font-size: 60px;
+  margin: 0;
+  margin-top: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ,
+    Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.a {
+  display: inline-flex;
+  height: 70%;
+  position: relative;
+}
+/* .content3{
+            border: 5px solid blue;
+        } */
+.autoplay {
+  width: 1770px;
+}
+.post {
+  height: 100%;
+  /* width: auto; */
+}
+.post > img {
+  border-radius: 20%;
+}
+.tb {
+  width: 15px;
+  /* height: auto; */
+}
+.tb,
+.cursor {
+  height: 15px;
+}
+.c3Wrap {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: inline-flex;
+}
+#cursor {
+  opacity: 0.7;
+  margin: 0px 40px;
+}
+.dottedIn {
+  width: 255px;
+}
+.dottedOut {
+  width: 590px;
+}
+.dottedIn,
+.dottedOut {
+  height: 8.3px;
+  border-bottom: dotted 2px gray;
+}
+#dNs {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 900;
+  color: gray;
+}
+
+#footer {
+  width: 100%;
+  height: 20%;
+}
+#f1 {
+  width: 100%;
+  height: 50%;
+  display: inline-flex;
+  /* margin-top: 80px; */
+}
+#f1b {
+  width: 48px;
+  height: 48px;
+  /* margin-left: 48.5%; */
+  margin: auto;
+  cursor: pointer;
+  border-radius: 100%;
+  border: none;
+  transition: all 2s ease-out;
+  background: #006064;
+}
+#f1b > img {
+  width: 25px;
+  margin-left: 5px;
+}
+#f2,
+.category,
+#selectCt {
+  background-color: #fffd92;
+}
+#f2 {
+  height: 50%;
+  cursor: pointer;
+}
+#fMargin {
+  height: 10px;
+  background-color: #fffd92;
+}
+.prevNone {
+  display: none;
+}
+#cMove {
+  text-align: center;
+}
+/* categoryPage */
+.categoryPage {
+  display: inline;
+}
+#selectCt {
+  width: 50%;
+  height: 1000px;
+  float: right;
+}
+#selectCt > h1 {
+  text-align: center;
+  margin-top: 40%;
+  font-size: 60px;
+}
+#selectCt > div {
+  text-align: center;
+  font-size: 24px;
+}
+#selectCt > h1,
+#selectCt > div {
+  color: rgb(195, 25, 82);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ,
+    Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.category {
+  /* width: 50%; */
+  height: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.category > div {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: gainsboro;
+  border-radius: 20%;
+}
+/* .c2,.c3,.c4{
+            width: 200px;
+            height: 200px;
+        } */
+
+/* all */
+.c1 {
+  z-index: 2;
+  top: 60%;
+  left: 60%;
+}
+.c2 {
+  z-index: 1;
+  top: 20px;
+  right: 100px;
+}
+.c3 {
+  z-index: 1;
+  left: 50px;
+  bottom: 40%;
+}
+
+/* 자동으로 고정된 높이 무시  */
+.test {
+  height: 100vh;
+}
