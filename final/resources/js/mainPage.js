@@ -1,5 +1,4 @@
 // ------------------------메인 페이지 구역-------------------------------
-
 // 로고 클릭시 작아짐 클릭하지 않았을때는 다시 원상태
 $("#logo").on({
   click: function () {
@@ -28,18 +27,20 @@ $("#hb2").hover(
   }
 );
 
-// hover시 밑줄
-$("#da>a").hover(
+$(".c1, .c2, .c3, .c4").hover(
   function () {
-    $(this).css("text-decoration", "underline");
+    $(".category>div").css("border", "5px solid rgb(216, 54, 108)");
   },
   function () {
-    $(this).css("text-decoration", "none");
+    $(".category>div").css("border", "");
   }
 );
+// div태그 클릭시 카테고리페이지로 이동
+$(".c1, .c2, .c3, .c4").click(function () {
+  location.href = "categoryPage.html";
+});
 
-// ----------- slickSlide 동작 구현 구역 -----------
-
+// ------------------------slickSlide 구역-------------------------------
 $(".slickSlide").slick({
   slidesToShow: 1,
   slidesToScroll: 1,
