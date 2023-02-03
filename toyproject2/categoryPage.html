@@ -5,29 +5,167 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>categoryPage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <style>
-         #header{
+        .wrap{
+            width: 100%;
+            height: 100vh;
+        }
+        div{
+            border: 1px solid red;
+        }
+        #header{
             width: 100%;
             height: 10%;
             display: grid;
-            grid-template-columns: 8% 65% 15% 12%;
+            grid-template-columns: 8% 10% 60% 14% 8%;
+        }
+
+        #star, #hb1, #hb2{
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 900;
+        }
+        #star, #hb2{
+            width: 100px;
+        }
+        #hb2{
+            background-color: #f0f0f0;
+            color: black;
+        }
+        #hb1{
+            width: 80px;
+        }
+        #star, #hb1{
+            background-color: #f51f1f;
+            color: white;
+        }
+        .header{
+            padding-top: 15px;
+        }
+        #textLogo{
+            font-weight: 500;
+            font-size: 20px;
+            margin: 0px 0px;
+            /* float: right; */
+            margin-left: 5px;
+        }
+        /* #da{
+           padding-top: 30px;
+        }
+        #da>a{
+            font-size: 16px;
+            text-decoration: none;
+            color: black;
+            border: 900;
+            margin-left: 20px;
+        } */
+        #welcome{
+            display: inline-flex;
+        }
+        #welcome>h4{
+            text-align: center;
+        }
+        #logo{
+            margin-left: 5px;
+            /* display: inline-flex; */
+        }
+        #logo>a{
+            text-decoration: none;
+            color: #cc0000;
+        }
+        #header button{
+            cursor: pointer;
+        }
+        #la{
+            width: 100%;
+            display: flex;
+        }
+        .categoryWrap{
+            padding-top: 0;
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+        }
+        .categoryName{
+            width: 25%;
+            height: 100%;
+            cursor: pointer;
+            /* background-color: lightgray;
+            border-radius: 20% 20% 0% 0%; */
+        }
+
+        /* 콘텐츠부분 */
+        #content{
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div id="header" >
-        <div id="logo" class="header">
-            <a id="la" href="mainPage1.html"><img src="resources/image/logo.png">
-            <h1 id="textLogo">Pinterest</h1></a>
+    <div class="wrap">
+        <div id="header" >
+            <div id="logo" class="header">
+                <a id="la" href="mainPage.html"><img src="resources/image/logo.png">
+                <h1 id="textLogo">Pinterest</h1></a>
+            </div>
+            <div id="hStar" class="header">
+                <button id="star">즐겨찾기</button>
+            </div>
+            <div class="categoryWrap header">
+                <div class="categoryName" id="c1">
+                    <h4>모든 콘텐츠</h4>
+                </div>
+                <div class="categoryName" id="c2">
+                    <h4>카테고리1</h4>
+                </div>
+                <div class="categoryName" id="c3">
+                    <h4>카테고리2</h4>
+                </div>
+                <div class="categoryName" id="c4">
+                    <h4>카테고리3</h4>
+                </div>
+            </div>
+            <div id="welcome">
+                <h4>환영합니다!&nbsp</h4>  <h4>userId님</h4>
+            </div>
+            <div id="hb" class="header">
+                <!-- <button id="hb1" type="button">로그인</button> -->
+                <button id="hb2" type="button">로그아웃</button>
+            </div>
         </div>
-        <div id="categoryName" class="header">
-            <h4>카테고리명 들어갈 자리</h4>
-        </div>
-        <div id="hb" class="header">
-            <button id="hb1" type="button">로그인</button>
-            <button id="hb2" type="button">가입하기</button>
-        </div>
+        <div id="content"></div>
     </div>
-    <div id="content"></div>
+
+    <script>
+        // JSON.parse(localStorage.getItem("cast"));
+
+        $("#logo").on({
+            "click": function(){
+                $("#la>img").css({"width":"27px", "height":"auto"});
+                $("#textLogo").css({"width":"27px", "height":"auto", "font-size": "15px"});
+            }
+        });
+
+        // $("#c1").on({
+        //     "click": function(){
+        //         $(this).css({"background-color":"lightgray", "border-radius":"20% 20% 0% 0%"});
+        //     }
+        // });
+    </script>
+
+    <script>
+        // 버튼 호버
+        $(function(){
+             $("#star, #hb2").hover(function(){
+                 $(this).css("backgroundColor", "#d0d0d0");
+             },  function(){
+                 $(this).css("backgroundColor", "#f0f0f0");
+             });
+        });
+    </script>
+
 </body>
 </html>
