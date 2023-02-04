@@ -1,9 +1,10 @@
 // ------------ 페이지 새로고침, 닫기에 따른 로그인 정보 관련 기본 동작 ------------
 
 // 만약 새로고침되어서 다시 실행되는 거라면 로그인창 띄우지 않게 처리
-if (localStorage.getItem('beforeUser')) {
+let bUser = JSON.parse(localStorage.getItem('beforeUser'));
+if (bUser) {
   $('#secLogin').css('display', 'none');
-  localStorage.setItem('currentUser', localStorage.getItem('beforeUser'));
+  localStorage.setItem('currentUser', JSON.stringify(bUser));
   localStorage.removeItem('beforeUser');
 }
 
@@ -35,10 +36,10 @@ document.onkeydown = function (e) {
     (e.ctrlKey == true && key == 'r') ||
     (e.ctrlKey == true && key == 'R')
   ) {
-    let cUser = localStorage.getItem('currentUser');
+    let cUser = JSON.parse(localStorage.getItem('currentUser'));
     if (cUser) {
       console.log(key, '눌림');
-      localStorage.setItem('beforeUser', cUser);
+      localStorage.setItem('beforeUser', JSON.stringify(cUser));
     }
   }
 };
@@ -68,6 +69,9 @@ let getImgesUnsplash = function (query, category) {
 };
 
 let putImgUnsplashMain = function (msg, category) {
+  if (msg[0]) {
+    msg = msg[0];
+  }
   try {
     $(category).css({
       ['background-image']: `url(${msg.urls.regular})`,
@@ -78,6 +82,7 @@ let putImgUnsplashMain = function (msg, category) {
     console.log(e);
     console.log('에러난', msg);
     console.log(category);
+    console.log(typeof msg);
   }
   // console.log(msg);
 };
@@ -99,10 +104,10 @@ $(`#c2 img`).attr('src', '');
 // 메인 상단 최신 이미지들에 픽섬에서 따온 랜덤 이미지 부여
 putImgPicsum();
 
-// getImgesUnsplash('/random?count=1', '.category>.c1');
-// getImgesUnsplash('/random?category=animals', '.category>.c2');
-// getImgesUnsplash('/random?category=food', '.category>.c3');
-// getImgesUnsplash('/random?category=fashion-beauty', '.category>.c4');
+getImgesUnsplash('/random?count=1', '.category>.c0');
+getImgesUnsplash('/random?category=animals', '.category>.c1');
+getImgesUnsplash('/random?category=food', '.category>.c2');
+getImgesUnsplash('/random?category=fashion-beauty', '.category>.c3');
 
 // console.log($('.category>.c1'));
 
@@ -112,8 +117,9 @@ $('.category>div').on('click', function () {
 });
 
 // div태그 클릭시 카테고리페이지로 이동
-$('.c1, .c2, .c3, .c4').click(function () {
-  localStorage.setItem('beforeUser', localStorage.getItem('currentUser'));
-  localStorage.setItem('category', $(this).attr('class'));
+$('.c0, .c1, .c2, .c3').click(function () {
+  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+  localStorage.setItem('beforeUser', JSON.stringify(cUser));
+  localStorage.setItem('category', JSON.stringify($(this).attr('class')));
   location.href = 'categoryPage.html';
 });

@@ -1,6 +1,11 @@
+:root {
+  /* 백그라운드 및 선택된 카테고리 색상용 변수 */
+  --back-color: #d9d9d9;
+}
+
 body {
   margin: 0;
-  background-color: #d9d9d9;
+  background-color: var(--back-color);
 }
 
 .wrap {
@@ -100,7 +105,7 @@ body {
 }
 
 .selectedCategory {
-  background-color: #00000040;
+  background-color: var(--back-color);
   border-radius: 100% 90% 0% 0%;
   color: white;
 }
@@ -112,8 +117,12 @@ body {
 #content {
   width: 100%;
   min-height: 100vh;
-  background-color: #d9d9d9;
+  background-color: var(--back-color);
   padding-top: 110px;
+}
+
+#content > * {
+  display: none;
 }
 /* #c0 {
   box-sizing: border-box;

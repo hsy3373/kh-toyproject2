@@ -305,21 +305,29 @@ let imgClickEvent = function () {
 
 // ------------------ 즐겨찾기 관련 메서드 구역 ----------------------------
 
-let getFavoriteImg = function (li) {
-  for (let item of Object.values(li)) {
-    if (item.type === 'picsum') {
-      $('#myFavorites').append(
-        `<div class="loadedImgDiv"><img class="loadedImg picsum" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
-      );
-    } else if (item.type === 'unsplash') {
-      $('#myFavorites').append(
-        `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
-      );
-    } else {
-      console.log('예상하지 못한 타입 ', item);
+let getFavoriteImg = function () {
+  let uList = JSON.parse(localStorage.getItem('userList'));
+  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+  let list = Object.values(uList[cUser].favorite);
+  if (list.length > 0) {
+    for (let item of list) {
+      if (item.type === 'picsum') {
+        $('#myFavorites').append(
+          `<div class="loadedImgDiv"><img class="loadedImg picsum" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+        );
+      } else if (item.type === 'unsplash') {
+        $('#myFavorites').append(
+          `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+        );
+      } else {
+        console.log('예상하지 못한 타입 ', item);
+      }
     }
+    loadedImgAni();
+  } else {
+    $('#myFavorites').text('즐겨찾기 된 항목이 없습니다');
+    $('.loadingAni').fadeOut();
   }
-  loadedImgAni();
 };
 
 $('#star').click(function () {
@@ -327,14 +335,7 @@ $('#star').click(function () {
   $(`#content > .favorite`).css('display', 'grid');
   $('#content > *').not(`.favorite`).css('display', 'none');
 
-  let uList = JSON.parse(localStorage.getItem('userList'));
-  let cUser = JSON.parse(localStorage.getItem('currentUser'));
-
-  let fList = uList[cUser].favorite;
-
-  console.log(fList);
-
-  getFavoriteImg(fList);
+  getFavoriteImg();
 });
 
 // ------------------  페이지 시작 시 실행시킬 메서드 모음 ----------------------------
@@ -352,8 +353,11 @@ function init() {
   let currentC = JSON.parse(localStorage.getItem('category'));
   if (currentC) {
     $(`#${currentC}`).addClass('selectedCategory');
-
-    changeCategory(currentC);
+    if (currentC === 'favorite') {
+      getFavoriteImg();
+    } else {
+      changeCategory(currentC);
+    }
   } else {
     console.log('카테고리 값 없음');
   }
