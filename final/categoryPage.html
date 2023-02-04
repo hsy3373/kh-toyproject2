@@ -5,9 +5,110 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="./resources/css/cateforyPage.css" />
   </head>
   <body>
-    테스트용
+    <div id="header">
+      <div id="logo" class="header">
+        <a id="la" href="mainPage.html"
+          ><img src="resources/image/logo.png" />
+          <h1 id="textLogo">Pinterest</h1></a
+        >
+      </div>
+      <div id="hStar" class="header">
+        <button id="star">즐겨찾기</button>
+      </div>
+      <div class="categoryWrap header">
+        <div class="categoryName" id="c0">
+          <div>전체</div>
+        </div>
+        <div class="categoryName" id="c1">
+          <div>Animals</div>
+        </div>
+        <div class="categoryName" id="c2">
+          <div>Food</div>
+        </div>
+        <div class="categoryName" id="c3">
+          <div>Fashion&beauty</div>
+        </div>
+      </div>
+      <div id="welcome">
+        <h4 id="wel">환영합니다!&nbsp</h4>
+        <h4 id="userId">userId님</h4>
+      </div>
+      <div id="hb" class="header">
+        <button id="hb2" type="button">로그아웃</button>
+      </div>
+    </div>
+    <div class="wrap">
+      <div id="content">
+        <div class="favorite"></div>
+        <div class="c1 card_container"></div>
+        <div class="c2 card_container"></div>
+        <div class="c3 card_container"></div>
+        <div class="c4 card_container"></div>
+      </div>
+    </div>
+
+    <!-- 로딩 바 -->
+    <div class="loadingAni">
+      <div class="loader10"></div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <button
+        id="modalClose"
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 70vw">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="imgAuthor"></h4>
+            <div id="modalMenu">
+              <div id="modalFavorite"></div>
+              <div id="modalShare"></div>
+              <div id="modalDown"></div>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div id="modalImg">
+              <div class="innerImgInfo"></div>
+              <img class="innerImgModal" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <textarea
+      id="shareText"
+      style="opacity: 0; position: absolute; bottom: 0"
+    ></textarea>
+    <div id="toast">알림</div>
     <script src="./resources/js/categoryPage.js"></script>
+    <script src="./resources/js/localstorage.js"></script>
   </body>
 </html>

@@ -35,10 +35,6 @@ $('.c1, .c2, .c3, .c4').hover(
     $('.category>div').css('border', '');
   }
 );
-// // div태그 클릭시 카테고리페이지로 이동
-// $(".c1, .c2, .c3, .c4").click(function () {
-//   location.href = "categoryPage.html";
-// });
 
 // ------------------------slickSlide 구역-------------------------------
 $('.slickSlide').slick({

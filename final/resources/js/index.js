@@ -68,17 +68,18 @@ let getImgesUnsplash = function (query, category) {
 };
 
 let putImgUnsplashMain = function (msg, category) {
-  // for (let i = 0; i < 20; i++) {
-  //   console.log(typeof $(`#c2 img`));
-  //   $($(`#c2 img`)[i]).attr({ src: msg[i].urls.regular, id: msg[i].id });
-  // }
-  $(category).css({
-    ['background-image']: `url(${msg.urls.regular})`,
-    ['background-size']: 'contain',
-    id: msg.id,
-  });
-
-  console.log(msg);
+  try {
+    $(category).css({
+      ['background-image']: `url(${msg.urls.regular})`,
+      ['background-size']: 'contain',
+      id: msg.id,
+    });
+  } catch (e) {
+    console.log(e);
+    console.log('에러난', msg);
+    console.log(category);
+  }
+  // console.log(msg);
 };
 
 // picsum용 이미지 세팅 함수
@@ -93,17 +94,15 @@ let putImgPicsum = function () {
   }
 };
 
-// 이미지
+// 상단 최신 이미지들 구역 기본 이미지들 삭제
 $(`#c2 img`).attr('src', '');
 // 메인 상단 최신 이미지들에 픽섬에서 따온 랜덤 이미지 부여
 putImgPicsum();
 
-// https://api.unsplash.com/photos?category=nature
-
-getImgesUnsplash('/random?count=1', '.category>.c1');
-getImgesUnsplash('/random?category=animals', '.category>.c2');
-getImgesUnsplash('/random?category=food', '.category>.c3');
-getImgesUnsplash('/random?category=fashion-beauty', '.category>.c4');
+// getImgesUnsplash('/random?count=1', '.category>.c1');
+// getImgesUnsplash('/random?category=animals', '.category>.c2');
+// getImgesUnsplash('/random?category=food', '.category>.c3');
+// getImgesUnsplash('/random?category=fashion-beauty', '.category>.c4');
 
 // console.log($('.category>.c1'));
 
@@ -114,6 +113,7 @@ $('.category>div').on('click', function () {
 
 // div태그 클릭시 카테고리페이지로 이동
 $('.c1, .c2, .c3, .c4').click(function () {
-  location.href = 'categoryPage.html';
   localStorage.setItem('beforeUser', localStorage.getItem('currentUser'));
+  localStorage.setItem('category', $(this).attr('class'));
+  location.href = 'categoryPage.html';
 });
