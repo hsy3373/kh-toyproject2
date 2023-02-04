@@ -25,16 +25,12 @@ let userList = {
   userId1: {
     id: 'userId1',
     pwd: 'pwd1',
-    favorite: {
-      1: { type: 'picsum', id: '1' },
-      2: { type: 'picsum', id: '2' },
-      j34IJcOtv9w: { type: 'unsplash', id: 'j34IJcOtv9w' },
-    },
+    favorite: {},
   },
   userId2: {
     id: 'userId2',
     pwd: 'pwd2',
-    favorite: [{ type: 'picsum', id: '23' }],
+    favorite: {},
   },
   dbw: {
     id: 'dbw',

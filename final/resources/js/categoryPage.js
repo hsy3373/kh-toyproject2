@@ -1,15 +1,15 @@
 // ------------------ 카테고리 내부 동작 메서드 선언 구역 ------------------
 
-// 카테고리 목록 변경시 호출할 메서드
+// 카테고리 목록 변경시 호출할 메서드, 현재 카테고리가 어떤건지 로컬스토리지 값도 변경
 let changeCategory = function (category) {
-  let categoryList = $('#content > *');
-  for (let cl of categoryList) {
-    if ($(cl).hasClass(category)) {
-      $(cl).css('display', 'grid');
-    } else {
-      $(cl).css('display', 'none');
-    }
-    console.log('현재 카테고리 : ', $(cl).attr('class'), $(cl).css('display'));
+  localStorage.setItem('category', JSON.stringify(category));
+
+  $(`#content > .${category}`).css('display', 'grid');
+  $('#content > *').not(`.${category}`).css('display', 'none');
+
+  if ($(`#content > .${category}`).children().length < 1) {
+    console.log('ㅅㄷㄴㅅㄷㄴㅅ');
+    getImgesUnsplash(category);
   }
 };
 
@@ -101,10 +101,17 @@ Unsplash 객체 예시
 */
 
 // Unsplash api 사용하여 이미지 로드 , 이미지를 넣을 카테고리(클래스명)와 이미지 검색 쿼리를 매개로 넣어 이용
-let getImgesUnsplash = function (category, query) {
+let getImgesUnsplash = function (category) {
+  let querys = {
+    c0: '/random?count=15',
+    c1: '/random?query=animals&count=15',
+    c2: '/random?query=food&count=15',
+    c3: '/random?query=fashion-beauty&count=15',
+  };
+
   $.ajax({
     method: 'GET',
-    url: `https://api.unsplash.com/photos${query}`,
+    url: `https://api.unsplash.com/photos${querys[category]}`,
     dataType: 'json',
     beforeSend: function (xhr) {
       $('.loadingAni').fadeIn(300);
@@ -116,14 +123,16 @@ let getImgesUnsplash = function (category, query) {
     },
   }).done(function (msg) {
     putImgUnsplash(msg, category);
+    console.log(msg);
   });
 };
 
 // Unsplash 객체용 이미지 삽입 메서드
 let putImgUnsplash = function (msg, category) {
+  console.log();
   for (let item of msg) {
     $(`.${category}`).append(
-      `<div class="loadedImgDiv"><img class="unsplash" src="${item.urls.regular}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+      `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.urls.regular}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
     );
   }
   // msg 리스트 상 가장 마지막에 추가된 img 태그의 이미지 로드가 끝나면 함수 실행
@@ -294,20 +303,57 @@ let imgClickEvent = function () {
   });
 };
 
+// ------------------ 즐겨찾기 관련 메서드 구역 ----------------------------
+
+let getFavoriteImg = function (li) {
+  for (let item of Object.values(li)) {
+    if (item.type === 'picsum') {
+      $('#myFavorites').append(
+        `<div class="loadedImgDiv"><img class="loadedImg picsum" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+      );
+    } else if (item.type === 'unsplash') {
+      $('#myFavorites').append(
+        `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+      );
+    } else {
+      console.log('예상하지 못한 타입 ', item);
+    }
+  }
+  loadedImgAni();
+};
+
+$('#star').click(function () {
+  localStorage.setItem('category', JSON.stringify('favorite'));
+  $(`#content > .favorite`).css('display', 'grid');
+  $('#content > *').not(`.favorite`).css('display', 'none');
+
+  let uList = JSON.parse(localStorage.getItem('userList'));
+  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+
+  let fList = uList[cUser].favorite;
+
+  console.log(fList);
+
+  getFavoriteImg(fList);
+});
+
 // ------------------  페이지 시작 시 실행시킬 메서드 모음 ----------------------------
 function init() {
   getNavType();
   // 현재 페이지에 로그인 된 유저 값 받아오기
-  if (localStorage.getItem('beforeUser')) {
-    localStorage.setItem('currentUser', localStorage.getItem('beforeUser'));
+  let bUser = JSON.parse(localStorage.getItem('beforeUser'));
+  if (bUser) {
+    localStorage.setItem('currentUser', JSON.stringify(bUser));
     localStorage.removeItem('beforeUser');
   }
+
+  $('#userId').text(JSON.parse(localStorage.getItem('currentUser')) + '님');
   // 페이지 첫 시작시 표시 카테고리 화면결정
-  if (localStorage.getItem('category')) {
-    let currentC = localStorage.getItem('category');
+  let currentC = JSON.parse(localStorage.getItem('category'));
+  if (currentC) {
+    $(`#${currentC}`).addClass('selectedCategory');
+
     changeCategory(currentC);
-    // getImgesUnsplash(currentC, '/random?count=20');
-    getImgesPicsum(2, 20, currentC);
   } else {
     console.log('카테고리 값 없음');
   }
@@ -321,7 +367,11 @@ function init() {
       console.log(++scrollnum);
       // getImgesUnsplash('random', $('.imgListWrap').children().length * 6);
       // testtest();
-      getImgesPicsum(scrollnum, 15, localStorage.getItem('category'));
+      getImgesPicsum(
+        scrollnum,
+        15,
+        JSON.parse(localStorage.getItem('category'))
+      );
     }
   });
 
@@ -373,14 +423,12 @@ $('#logo').on({
 
 // 카테고리 선택될때마다 색부여(회색)
 $('.categoryName').click(function () {
-  $(this).css({
-    'background-color': '#00000040',
-    'border-radius': '100% 90% 0% 0%',
-    color: 'white',
-  });
-  $('#content').css('background-color', '#00000040');
+  $(this).addClass('selectedCategory');
   var notClicked = $('.categoryName').not(this);
-  notClicked.css({ 'background-color': 'white', color: 'black' });
+  notClicked.removeClass('selectedCategory');
+
+  // 카테고리 정보도 변경해줌
+  changeCategory($(this).attr('id'));
 });
 
 // 버튼 호버
