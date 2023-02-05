@@ -425,7 +425,7 @@ $('#logo').on({
   },
 });
 
-// 카테고리 선택될때마다 색부여(회색)
+// 카테고리 선택될때마다 배경색 부여(회색)
 $('.categoryName').click(function () {
   $(this).addClass('selectedCategory');
   var notClicked = $('.categoryName').not(this);

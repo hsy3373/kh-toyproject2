@@ -11,17 +11,24 @@ body {
 .wrap {
   width: 100%;
 }
-/* div{
-  border: 1px solid red;
-} */
+
 #header {
   width: 100%;
-  height: 100px;
+  height: 120px;
   position: fixed;
   display: grid;
   background-color: white;
-  grid-template-columns: 8% 10% 60% 14% 8%;
+  grid-template-columns: 10% 11% 74% 5%;
   z-index: 900;
+}
+
+#menuImg{
+  width: 20px;
+  margin-bottom: 3px;
+}
+
+.dropdown-menu{
+  --bs-dropdown-link-active-bg: #f51f1f;
 }
 
 #star,
@@ -33,11 +40,12 @@ body {
   font-size: 16px;
   font-weight: 900;
 }
-#star,
-#hb2 {
+#star{
   width: 100px;
 }
 #hb2 {
+  margin-right: 15px;
+  float: right;
   background-color: #f0f0f0;
   color: black;
 }
@@ -50,24 +58,25 @@ body {
   color: white;
 }
 .header {
-  padding-top: 15px;
+  padding-top: 30px;
 }
 #textLogo {
   font-weight: 500;
   font-size: 20px;
   margin: 0px 0px;
-  /* float: right; */
   margin-left: 5px;
+  margin-top: 2px;
 }
 #welcome {
   display: inline-flex;
 }
-#wel {
-  margin-left: 30px;
+#welcome > h4 {
+  padding-top: 6px;
+  font-size: 18px;
+  margin-bottom: 0;
 }
 #logo {
-  margin-left: 5px;
-  /* display: inline-flex; */
+  margin-left: 10px;
 }
 #logo > a {
   text-decoration: none;
@@ -97,11 +106,11 @@ body {
   cursor: pointer;
 }
 .categoryName > div {
-  /* width: 100%;
-  height: 100%; */
   text-align: center;
   font-weight: bolder;
   font-size: 1.5em;
+  margin-top: 30px;
+  margin-bottom: 0;
 }
 
 .selectedCategory {
@@ -124,14 +133,14 @@ body {
 #content > * {
   display: none;
 }
-/* #c0 {
-  box-sizing: border-box;
-  margin-top: 10px;
-  background-color: #d9d9d9;
-  border-radius: 100% 100% 0% 0%;
+
+/* #c0{
+ 
+  background-color: gainsboro;
+  border-radius: 80% 80% 0% 0%;
   color: white;
   font-weight: bolder;
-  font-size: 1.5em;
+  font-size: 30px;
 } */
 
 /* ------------------  이미지 카드  ----------------------- */
