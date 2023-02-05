@@ -56,7 +56,38 @@ let favorAdd = function (img) {
         link: img.attr('src'),
       };
       localStorage.setItem('userList', JSON.stringify(uList));
+      $(`#${imgId}`).next('.favoriteUnfill').attr('class', 'favoriteFill');
       favorToast('즐겨찾기에 추가되었습니다');
+    } else {
+      favorToast('유저 정보 없음. 다시 로그인해주세요');
+      localStorage.removeItem('currentUser');
+    }
+  } else {
+    favorToast('로그인 후 사용 가능합니다');
+  }
+};
+
+// 즐겨찾기 삭제하는 메서드
+let favorRemove = function (img) {
+  let imgId = img.attr('id');
+  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+  //  currentUser가 비었는지 확인
+  // 자바스크립트 자료형에서 "", null, undefined, 0, NaN을 조건식에 넣으면 false로 반환됨
+  if (cUser) {
+    let uList = JSON.parse(localStorage.getItem('userList'));
+
+    // 만약 유저리스트 안에 currentUser 아이디 값이 없을 경우를 대비
+    if (uList[cUser]) {
+      // 로컬스토리지 데이터에서 해당 즐겨찾기 삭제
+      delete uList[cUser].favorite[imgId];
+      localStorage.setItem('userList', JSON.stringify(uList));
+
+      // 만약 즐겨찾기 영역에 해당 아이디 값 가진 이미지 요소 있으면 삭제
+      $(`.bookmark#${imgId}`).parent().remove();
+      // 해당 이미지 아이디를 가진 요소의 형제 요소 클래스 바꿔서 북마크 아이콘 변경
+      $(`#${imgId}`).next('.favoriteFill').attr('class', 'favoriteUnfill');
+
+      favorToast('즐겨찾기가 삭제되었습니다');
     } else {
       favorToast('유저 정보 없음. 다시 로그인해주세요');
       localStorage.removeItem('currentUser');
@@ -79,10 +110,31 @@ let favorToast = function (text) {
 
 // 모달창 안의 즐겨찾기 버튼에 이벤트 부여
 $('#modalFavorite').on('click', function () {
-  favorAdd($('.innerImgModal'));
+  let id = $('.innerImgModal').attr('id');
+  if ($(this).attr('class') == 'favoriteFill') {
+    console.log('favoriteFill 로 들어와서 리무브 됨');
+    favorRemove($('.innerImgModal'));
+
+    $(`#myFavorites`);
+
+    $(`#${id}:not(.innerImgModal)`).next().attr('class', 'favoriteUnfill');
+    $(this).attr('class', 'favoriteUnfill');
+  } else if ($(this).attr('class') == 'favoriteUnfill') {
+    console.log('favoriteUnfill 로 들어와서 add 됨');
+    favorAdd($('.innerImgModal'));
+    $(`#${id}:not(.innerImgModal)`).next().attr('class', 'favoriteFill');
+    $(this).attr('class', 'favoriteFill');
+  } else {
+    console.log('클래스값 제대로 못찾음');
+  }
 });
 
-// 모달창의 즐겨찾기 버튼 이벤트
-$(document).on('click', '.favoriteDiv', function () {
+// 이미지 즐겨찾기 버튼 이벤트
+$(document).on('click', '.favoriteUnfill:not(#modalFavorite)', function () {
   favorAdd($(this).prev());
+});
+
+// 이미지 즐겨찾기 버튼 이벤트
+$(document).on('click', '.favoriteFill:not(#modalFavorite)', function () {
+  favorRemove($(this).prev());
 });

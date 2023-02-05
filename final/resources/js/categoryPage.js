@@ -117,10 +117,20 @@ let getImgesUnsplash = function (category) {
 
 // Unsplash 객체용 이미지 삽입 메서드
 let putImgUnsplash = function (msg, category) {
-  console.log();
+  let list = getFavoriteList();
+  let linkList = [];
+  if (list.length > 0) {
+    for (let item of list) {
+      linkList.push(item.link);
+    }
+  }
   for (let item of msg) {
+    let bookmarkClass = 'favoriteUnfill';
+    if (linkList.includes(item.urls.regular)) {
+      bookmarkClass = 'favoriteFill';
+    }
     $(`.${category}`).append(
-      `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.urls.regular}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+      `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.urls.regular}" id="${item.id}"></img><div class="${bookmarkClass}"></div></div>`
     );
   }
   // msg 리스트 상 가장 마지막에 추가된 img 태그의 이미지 로드가 끝나면 함수 실행
@@ -155,9 +165,20 @@ let getImgesPicsum = function (page, number, category) {
 
 // picsum용 이미지 세팅 함수
 let putImgPicsum = function (msg, category) {
+  let list = getFavoriteList();
+  let linkList = [];
+  if (list.length > 0) {
+    for (let item of list) {
+      linkList.push(item.link);
+    }
+  }
   for (let item of msg) {
+    let bookmarkClass = 'favoriteUnfill';
+    if (linkList.includes(item.download_url)) {
+      bookmarkClass = 'favoriteFill';
+    }
     $(`.${category}`).append(
-      `<div class="loadedImgDiv"><img class="loadedImg picsum" src="${item.download_url}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+      `<div class="loadedImgDiv"><img class="loadedImg picsum" src="${item.download_url}" id="${item.id}"></img><div class="${bookmarkClass}"></div></div>`
     );
   }
   // msg 리스트 상 가장 마지막에 추가된 img 태그의 이미지 로드가 끝나면 함수 실행
@@ -168,7 +189,9 @@ let putImgPicsum = function (msg, category) {
 
 // 이미지 id 값으로 정보 불러온 후 모달창 팝업 시키는 메서드
 // Picsum 이미지용, Unsplash이미지용 두가지 존재
-let getOneImgePicsum = function (id) {
+let getOneImgePicsum = function (img) {
+  let id = $(img).attr('id');
+  let favorClass = $(img).next().attr('class');
   $.ajax({
     method: 'GET',
     url: `https://picsum.photos/id/${id}/info`,
@@ -177,6 +200,7 @@ let getOneImgePicsum = function (id) {
       $('#shareText').text('');
     },
   }).done(function (msg) {
+    $('#modalFavorite').attr('class', favorClass);
     $('#imgAuthor').text(msg.author);
     $('.innerImgModal').attr('src', msg.download_url);
     $('.innerImgModal').attr('id', msg.id);
@@ -189,7 +213,9 @@ let getOneImgePicsum = function (id) {
 };
 
 // GET /search/photos:id
-let getOneImgeUnsplash = function (id) {
+let getOneImgeUnsplash = function (img) {
+  let id = $(img).attr('id');
+  let favorClass = $(img).next().attr('class');
   $.ajax({
     method: 'GET',
     url: `https://api.unsplash.com/photos/${id}`,
@@ -201,8 +227,7 @@ let getOneImgeUnsplash = function (id) {
       );
     },
   }).done(function (msg) {
-    console.log(`https://api.unsplash.com/photos?:${id}`);
-    console.log(id, msg);
+    $('#modalFavorite').attr('class', favorClass);
     $('#imgAuthor').text(msg.user.first_name + ' ' + msg.user.last_name);
     $('.innerImgModal').attr('src', msg.urls.regular);
     $('.innerImgModal').attr('id', msg.id);
@@ -251,11 +276,11 @@ let imgClickEvent = function () {
   // 이미지 클릭 시 아이디 값 가져와서 해당 사이트에서 아이디값으로 검색 가능함
   $(document).on('click', '.picsum', function () {
     $('.innerImgModal').attr('src', '');
-    getOneImgePicsum($(this).attr('id'));
+    getOneImgePicsum($(this));
   });
   $(document).on('click', '.unsplash', function () {
     $('.innerImgModal').attr('src', '');
-    getOneImgeUnsplash($(this).attr('id'));
+    getOneImgeUnsplash($(this));
   });
   // picsum용, unsplash용 각각 나눔
 
@@ -293,26 +318,28 @@ let imgClickEvent = function () {
 
 // ------------------ 즐겨찾기 관련 메서드 구역 ----------------------------
 
-let getFavoriteImg = function () {
-  console.log('즐겨찾기 클릭됨');
+let getFavoriteList = function () {
   let uList = JSON.parse(localStorage.getItem('userList'));
   let cUser = JSON.parse(localStorage.getItem('currentUser'));
   let list = Object.values(uList[cUser].favorite);
-  console.log($('#myFavorites').children());
+  return list;
+};
+
+let getFavoriteImg = function () {
+  let list = getFavoriteList();
   $('#myFavorites').empty();
-  console.log($('#myFavorites').children());
   if (list.length > 0) {
     for (let item of list) {
       if (item.type === 'picsum') {
         $('#myFavorites').append(
-          `<div class="loadedImgDiv"><img class="loadedImg picsum" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+          `<div class="loadedImgDiv"><img class="loadedImg picsum bookmark" src="${item.link}" id="${item.id}"></img><div class="favoriteFill"></div></div>`
         );
       } else if (item.type === 'unsplash') {
         $('#myFavorites').append(
-          `<div class="loadedImgDiv"><img class="loadedImg unsplash" src="${item.link}" id="${item.id}"></img><div class="favoriteDiv"></div></div>`
+          `<div class="loadedImgDiv"><img class="loadedImg unsplash bookmark" src="${item.link}" id="${item.id}"></img><div class="favoriteFill"></div></div>`
         );
       } else {
-        console.log('예상하지 못한 타입 ', item);
+        console.log('예상하지 못한 타입 ', item.type);
       }
     }
     loadedImgAni();
@@ -350,6 +377,9 @@ let init = function () {
   // 스크롤이 하단에 닿을때마다 페이지 수 증가시키며 이미지 불러오기
   $(window).scroll(function () {
     let category = JSON.parse(localStorage.getItem('category'));
+    if (category === 'favorite') {
+      return;
+    }
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
       getImgesUnsplash(category);
     }
@@ -382,7 +412,7 @@ $('#logo').on({
   },
 });
 
-// 카테고리 선택될때마다 배경색 부여(회색)
+// 카테고리 선택될때마다 색부여(회색)
 $('.categoryName').click(function () {
   $(this).addClass('selectedCategory');
   var notClicked = $('.categoryName').not(this);
