@@ -22,12 +22,12 @@ body {
   z-index: 900;
 }
 
-#menuImg{
+#menuImg {
   width: 20px;
   margin-bottom: 3px;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   --bs-dropdown-link-active-bg: #f51f1f;
 }
 
@@ -40,7 +40,7 @@ body {
   font-size: 16px;
   font-weight: 900;
 }
-#star{
+#star {
   width: 100px;
 }
 #hb2 {
@@ -127,15 +127,15 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: var(--back-color);
-  padding-top: 110px;
+  padding-top: 130px;
 }
 
 #content > * {
   display: none;
 }
 
-#fvTi{
-  color:white;
+#fvTi {
+  color: white;
   text-align: center;
   font-weight: 900;
   margin-top: 50px;
@@ -211,22 +211,34 @@ body {
 }
 
 /* 이미지 상 즐겨찾기 버튼  */
-.favoriteDiv {
+.favoriteUnfill {
   cursor: pointer;
   width: 4vw;
   height: 4vw;
-  background: url(../image/shape.png) no-repeat center;
+  background: url(../image/bookmark-2.png) no-repeat center;
   background-size: cover;
-  background-color: #ffffff1e;
-  filter: drop-shadow(0px 0px 4px #ffffff6b); /*그림자*/
-  border-radius: 50%;
+  filter: drop-shadow(0px 0px 4px #ffffffb6); /*그림자*/
   position: absolute;
   bottom: 1vw;
   right: 1.5vw;
   opacity: 0;
 }
 
-.favoriteDiv:active {
+.favoriteFill {
+  cursor: pointer;
+  width: 4vw;
+  height: 4vw;
+  background: url(../image/bookmark-1.png) no-repeat center;
+  background-size: cover;
+  filter: drop-shadow(0px 0px 4px #ffffffb6); /*그림자*/
+  position: absolute;
+  bottom: 1vw;
+  right: 1.5vw;
+  opacity: 0;
+}
+
+.favoriteFill:active,
+.favoriteUnfill:active {
   width: 3.7vw;
   height: 3.7vw;
   bottom: 1.1vw;
@@ -444,8 +456,11 @@ body {
 #modalFavorite {
   width: 2.5em;
   height: 2.5em;
-  background: url(../image/shape.png) no-repeat center;
-  background-size: cover;
+  display: inline-block;
+  position: relative;
+  opacity: 1;
+  bottom: auto;
+  right: auto;
 }
 
 #modalShare {

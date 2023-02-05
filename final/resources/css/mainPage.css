@@ -24,11 +24,11 @@
   grid-template-columns: 10% 74% 11% 5%;
 }
 
-#menuImg{
+#menuImg {
   width: 20px;
   margin-bottom: 3px;
 }
-.dropdown-menu{
+.dropdown-menu {
   --bs-dropdown-link-active-bg: #f51f1f;
 }
 #star,
@@ -40,7 +40,7 @@
   font-size: 16px;
   font-weight: 900;
 }
-#star{
+#star {
   width: 100px;
 }
 #hb2 {
@@ -69,6 +69,7 @@
 }
 #welcome {
   display: inline-flex;
+  visibility: hidden;
 }
 #welcome > h4 {
   padding-top: 6px;
@@ -117,7 +118,7 @@
   margin: auto;
   cursor: pointer;
 }
-.prevArrow{
+.prevArrow {
   margin-left: 30px;
 }
 #downImg {
@@ -135,11 +136,11 @@
   font-size: 60px;
   margin: 0;
   margin-top: 30px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
-    "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3",
-    "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    Helvetica, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', メイリオ,
+    Meiryo, 'ＭＳ Ｐゴシック', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 .a {
   display: inline-flex;
@@ -256,11 +257,11 @@
 #selectCt > h1,
 #selectCt > div {
   color: rgb(195, 25, 82);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
-    "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3",
-    "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    Helvetica, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', メイリオ,
+    Meiryo, 'ＭＳ Ｐゴシック', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 .category {
@@ -299,13 +300,13 @@
   left: 50px;
   bottom: 40%;
 }
-.c3{
+.c3 {
   z-index: 1;
 }
-.category h4{
+.category h4 {
   visibility: hidden;
 }
-.hoverCt{
+.hoverCt {
   width: 250px;
   height: 70px;
   text-align: center;
@@ -317,7 +318,6 @@
   border-radius: 50%;
   color: black;
 }
-
 
 /* 자동으로 고정된 높이 무시  */
 .test {
