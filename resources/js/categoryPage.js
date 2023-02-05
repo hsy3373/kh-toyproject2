@@ -106,7 +106,7 @@ let getImgesUnsplash = function (category) {
     dataType: 'json',
     beforeSend: function (xhr) {
       $('.loadingAni').fadeIn(300);
-      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey2);
+      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey1);
     },
     error: function (jqXHR) {
       console.log(jqXHR); //응답 메시지

@@ -110,7 +110,7 @@ let getImgesUnsplash = function (query, category) {
     dataType: 'json',
     beforeSend: function (xhr) {
       $('.loadingAni').fadeIn(300);
-      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey2);
+      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey1);
     },
   }).done(function (msg) {
     putImgUnsplashMain(msg, category);
