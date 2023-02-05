@@ -82,3 +82,76 @@ $('.autoplay').slick({
   // ,
   // appendDots: $(".dots")
 });
+
+// ---------메인 페이지 이미지 관련----------------
+
+let unsplashKey1 = '-nwvkN9jP_iusw2zg2YbLPJFOPsTpJmRldNZhBoojXM';
+let unsplashKey2 = '8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k';
+
+/**
+ * @param {*} query  해당 api 로 전송할 url 뒷부분 (=명령어, 쿼리)
+ * @param {*} category 불러온 이미지를 넣을 요소
+ */
+let getImgesUnsplash = function (query, category) {
+  $.ajax({
+    method: 'GET',
+    url: `https://api.unsplash.com/photos${query}`,
+    dataType: 'json',
+    beforeSend: function (xhr) {
+      $('.loadingAni').fadeIn(300);
+      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey2);
+    },
+  }).done(function (msg) {
+    putImgUnsplashMain(msg, category);
+  });
+};
+
+let putImgUnsplashMain = function (msg, category) {
+  if (msg[0]) {
+    msg = msg[0];
+  }
+  try {
+    $(category).css({
+      ['background-image']: `url(${msg.urls.regular})`,
+      ['background-size']: 'contain',
+      id: msg.id,
+    });
+  } catch (e) {
+    console.log(e);
+    console.log('에러난', msg);
+    console.log(category);
+    console.log(typeof msg);
+  }
+  // console.log(msg);
+};
+
+// picsum용 이미지 세팅 함수
+let putImgPicsum = function () {
+  for (let i = 0; i < 20; i++) {
+    let int = Math.floor(Math.random() * 100);
+    console.log(typeof $(`#c2 img`));
+    $($(`#c2 img`)[i]).attr(
+      'src',
+      `https://picsum.photos/400/500?random=${int}`
+    );
+  }
+};
+
+// 상단 최신 이미지들 구역 기본 이미지들 삭제
+$(`#c2 img`).attr('src', '');
+// 메인 상단 최신 이미지들에 픽섬에서 따온 랜덤 이미지 부여
+putImgPicsum();
+
+// 카테고리들에 각각 이미지 할당
+getImgesUnsplash('/random?count=1', '.category>.c0');
+getImgesUnsplash('/random?query=animals&count=1', '.category>.c1');
+getImgesUnsplash('/random?query=food&count=1', '.category>.c2');
+getImgesUnsplash('/random?query=fashion-beauty&count=1', '.category>.c3');
+
+// 클릭시 해당 클래스명을 가지는 카테고리로 이동(페이지 변경됨)
+$('.c0, .c1, .c2, .c3, #star').click(function () {
+  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+  localStorage.setItem('beforeUser', JSON.stringify(cUser));
+  localStorage.setItem('category', JSON.stringify($(this).attr('class')));
+  location.href = 'categoryPage.html';
+});

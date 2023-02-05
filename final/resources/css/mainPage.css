@@ -71,6 +71,7 @@
 } */
 #welcome {
   display: inline-flex;
+  visibility: hidden;
 }
 #welcome > h4 {
   text-align: center;

@@ -115,3 +115,18 @@ function downloadPic(url) {
   img.crossOrigin = 'anonymous';
   img.src = url;
 }
+
+localStorage.setItem('testjson1', 'test');
+
+localStorage.setItem('testjson2', JSON.stringify('test'));
+
+console.log(
+  // 파싱이 안됨
+  // JSON.parse(localStorage.getItem('testjson1')),
+  localStorage.getItem('testjson1')
+);
+
+console.log(
+  JSON.parse(localStorage.getItem('testjson2')),
+  localStorage.getItem('testjson2')
+);
