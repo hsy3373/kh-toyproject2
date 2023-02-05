@@ -28,6 +28,20 @@ window.onload = function (event) {
   }
 };
 
+// 로그아웃
+$('#logOut').on('click', function () {
+  console.log('로그아웃');
+  localStorage.removeItem('currentUser');
+  location.href = 'index.html';
+  return;
+});
+
+// 회원탈퇴 todo!
+$('#deleteUser').click(function () {
+  // localStorage.removeItem('currentUser');
+  // checkUserLogin();
+});
+
 // ---------------- 로컬 스토리지와 연동 구역 -------------------
 
 //------------------------------- 즐겨찾기 관련 구역 ----------------------------

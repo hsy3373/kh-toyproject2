@@ -323,3 +323,9 @@
 .test {
   height: 100vh;
 }
+
+/* 드롭다운 메뉴 */
+
+.dropdown-item {
+  cursor: pointer;
+}

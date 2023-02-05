@@ -11,9 +11,12 @@ let changeCategory = function (category) {
 
   // 즐겨찾기 메뉴와 그 외 카테고리들 구분하여 동작 실행
   if (category === 'favorite') {
+    $(`body, #content`).css('background-color', '#525252');
+
     getFavoriteImg();
   } else if ($(`#content > .${category}`).children().length < 1) {
     getImgesUnsplash(category);
+    $(`body, #content`).css('background-color', 'var(--back-color)');
   }
 };
 

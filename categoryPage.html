@@ -69,8 +69,10 @@
           <img id="menuImg" src="resources/image/menu.png" />
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">로그아웃</a></li>
-          <li><a class="dropdown-item" href="#">회원탈퇴</a></li>
+          <li><div class="dropdown-item" id="logOut">로그아웃</div></li>
+          <li>
+            <div class="dropdown-item" id="deleteUser">회원탈퇴</div>
+          </li>
         </ul>
       </div>
     </div>
@@ -100,13 +102,13 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <button
+      <!-- <button
         id="modalClose"
         type="button"
         class="close"
         data-dismiss="modal"
         aria-label="Close"
-      >
+      > -->
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="modal-dialog modal-dialog-centered" style="max-width: 70vw">

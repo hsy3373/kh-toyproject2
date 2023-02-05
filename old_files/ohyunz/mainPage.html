@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mainPage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!--slick : slide libaray-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+    <!-- bootstrap -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <style>
+      .slickSlide {
+        width: 100%;
+        height: 100vh;
+        /* border: 5px solid blue; */
+      }
+      .slick-list {
+        width: 100%;
+        height: 100% !important;
+        box-sizing: border-box;
+        /* border: 5px solid blue; */
+      }
+      .slick-track {
+        height: auto;
+      }
+      /* div{
+            border: 1px solid red;
+        } */
+      #header {
+        width: 100%;
+        height: 70px;
+        display: grid;
+        grid-template-columns: 10% 74% 11% 5%;
+      }
+
+      #menuImg{
+        width: 20px;
+        margin-bottom: 3px;
+      }
+      .dropdown-menu{
+        --bs-dropdown-link-active-bg: #f51f1f;
+      }
+      #star,
+      #hb1,
+      #hb2 {
+        height: 40px;
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        font-weight: 900;
+      }
+      #star{
+        width: 100px;
+      }
+      #hb2 {
+        margin-right: 15px;
+        float: right;
+        background-color: #f0f0f0;
+        color: black;
+      }
+      #hb1 {
+        width: 80px;
+      }
+      #star,
+      #hb1 {
+        background-color: #f51f1f;
+        color: white;
+      }
+      .header {
+        padding-top: 15px;
+      }
+      #textLogo {
+        font-weight: 500;
+        font-size: 20px;
+        margin: 0px 0px;
+        margin-left: 5px;
+        margin-top: 2px;
+      }
+      #welcome {
+        display: inline-flex;
+      }
+      #welcome > h4 {
+        padding-top: 6px;
+        font-size: 18px;
+        margin-bottom: 0;
+      }
+      #logo {
+        margin-left: 10px;
+      }
+      #logo > a {
+        text-decoration: none;
+        color: #cc0000;
+      }
+      #header button {
+        cursor: pointer;
+      }
+      #la {
+        width: 100%;
+        display: flex;
+      }
+
+      /* .dots{
+            width: '100%';
+                    position: 'absolute';
+                    bottom: '24px';
+                    display: 'flex';
+                    alignItems: 'center';
+                    justifyContent: 'center;
+        }*/
+      .slick-dots {
+        display: inline-flex;
+        /* margin-left: 50%;
+            margin-top: 380px; */
+        position: absolute;
+        bottom: 0;
+      }
+
+      #content {
+        width: 100%;
+        height: 70%;
+      }
+      .prevArrow,
+      .nextArrow {
+        width: 10px;
+        height: 20px;
+        margin: auto;
+        cursor: pointer;
+      }
+      .prevArrow{
+        margin-left: 30px;
+      }
+      #downImg {
+        display: inline-block;
+        width: 20px;
+        height: 10px;
+        margin-left: 5px;
+      }
+      #content1 {
+        /* margin-left: 5px; */
+        height: 20%;
+      }
+      #content1 > h4 {
+        text-align: center;
+        font-size: 60px;
+        margin: 0;
+        margin-top: 30px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+          "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3",
+          "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial,
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      .a {
+        display: inline-flex;
+        height: 70%;
+        position: relative;
+      }
+      
+      .autoplay {
+        width: 1770px;
+      }
+      .post {
+        height: 100%;
+        /* width: auto; */
+      }
+      .post > img {
+        border-radius: 20%;
+      }
+      .tb {
+        width: 15px;
+        /* height: auto; */
+      }
+      .tb,
+      .cursor {
+        height: 15px;
+      }
+      
+      .c3Wrap {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        display: inline-flex;
+      }
+      #cursor {
+        opacity: 0.7;
+        margin: 0px 40px;
+      }
+      .dottedIn {
+        width: 245px;
+      }
+      .dottedOut {
+        width: 611px;
+      }
+      .dottedIn,
+      .dottedOut {
+        height: 8.3px;
+        border-bottom: dotted 2px gray;
+      }
+      #dNs {
+        padding-left: 10px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 900;
+        color: gray;
+      }
+
+      #footer {
+        width: 100%;
+        height: 20%;
+      }
+      #f1 {
+        width: 100%;
+        height: 50%;
+        display: inline-flex;
+        /* margin-top: 80px; */
+      }
+      #f1b {
+        width: 48px;
+        height: 48px;
+        /* margin-left: 48.5%; */
+        margin: auto;
+        cursor: pointer;
+        border-radius: 100%;
+        border: none;
+        transition: all 2s ease-out;
+        background: #006064;
+      }
+      #f1b > img {
+        width: 25px;
+        margin-left: 5px;
+      }
+      #f2,
+      .category,
+      #selectCt {
+        background-color: #fffd92;
+      }
+      #f2 {
+        height: 100%;
+        cursor: pointer;
+      }
+      .prevNone {
+        display: none;
+      }
+      #cMove {
+        padding-top: 40px;
+        text-align: center;
+      }
+      /* categoryPage */
+      .categoryPage {
+        display: inline;
+      }
+      #selectCt {
+        width: 50%;
+        height: 1000px;
+        float: right;
+      }
+      #selectCt > h1 {
+        text-align: center;
+        margin-top: 40%;
+        font-size: 60px;
+      }
+      #selectCt > div {
+        text-align: center;
+        font-size: 24px;
+      }
+      #selectCt > h1,
+      #selectCt > div {
+        color: rgb(195, 25, 82);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+          "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3",
+          "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial,
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+
+      .category {
+        /* width: 50%; */
+        height: 1000px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+      .category > div {
+        cursor: pointer;
+        position: relative;
+        width: 300px;
+        height: 300px;
+        background-color: gainsboro;
+        border-radius: 20%;
+      }
+      /* .c2,.c3,.c4{
+            width: 200px;
+            height: 200px;
+        } */
+
+      /* all */
+      .c1 {
+        z-index: 2;
+        top: 60%;
+        left: 60%;
+      }
+      .c2 {
+        z-index: 1;
+        top: 20px;
+        right: 100px;
+      }
+      .c3 {
+        z-index: 1;
+        left: 50px;
+        bottom: 40%;
+      }
+
+      /* 자동으로 고정된 높이 무시  */
+      .test {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div id="logo" class="header">
+        <a id="la" href="mainPage.html"
+          ><img src="resources/image/logo.png" />
+          <h1 id="textLogo">Pinterest</h1></a
+        >
+      </div>
+      <div id="hStar" class="header">
+        <button id="star">즐겨찾기</button>
+      </div>
+      <!-- <div id="da">
+            <a href="">소개</a>
+            <a href="">비즈니스</a>
+            <a href="">언론</a>
+        </div> -->
+      <div id="welcome" class="header">
+        <h4>환영합니다!&nbsp</h4>
+        <h4>userId님</h4>
+      </div>
+      <div id="hb" class="dropdown header">
+        <button class="btn btn-secondary" type="button" id="hb2" data-bs-toggle="dropdown" aria-expanded="false">
+          <img id="menuImg" src="resources/image/menu.png">
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">로그아웃</a></li>
+          <li><a class="dropdown-item" href="#">회원탈퇴</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="wrap" data-aos="fade-up" data-aos-delay="2000"> -->
+    <div class="slickSlide">
+      <div class="wrap slick_list">
+        <div class="test">
+          <div id="content">
+            <div id="content1"><h4>최신 콘텐츠를 확인해보세요</h4></div>
+            <div class="a">
+              <img class="prevArrow" src="resources/image/prev.png" />
+              <div id="c2" class="autoplay">
+                <div class="post"><img src="resources/image/ex.jpg" /></div>
+                <div class="post"><img src="resources/image/ex2.jpg" /></div>
+                <div class="post">3</div>
+                <div class="post">4</div>
+                <div class="post">5</div>
+                <div class="post">6</div>
+                <div class="post">7</div>
+                <div class="post">8</div>
+              </div>
+              <img class="nextArrow" src="resources/image/next.png" />
+            </div>
+
+            <div class="content3">
+              <div class="c3Wrap">
+                <div class="dottedOut"></div>
+                <span class="tb"
+                  ><img class="tb" src="resources/image/triangleBtn1.png"
+                /></span>
+                <div class="dottedIn"></div>
+                <div class="cursor">
+                  <img id="cursor" src="resources/image/커서.png" />
+                </div>
+                <div class="dottedIn"></div>
+                <span class="tb"
+                  ><img
+                    class="tb"
+                    src="resources/image/play-button-white-triangle-button-play-button-player-icon-160560.png"
+                /></span>
+                <div class="dottedOut"></div>
+              </div>
+              <div id="dNs">DRAG & SCROLL</div>
+            </div>
+          </div>
+          <div id="footer">
+            <div id="f1">
+              <button id="f1b" class="goCt">
+                <img src="resources/image/pngwing.com.png" />
+              </button>
+            </div>
+            <div id="f2" class="goCt">
+              <h4 id="cMove">
+                더 많은 콘텐츠 보기<img id="downImg" src="resources/image/down.png"/>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="categoryPage" data-aos="slide-up" data-aos-delay="2000"> -->
+
+      <div class="categoryPage slick_list">
+        <div class="test">
+          <div id="selectCt">
+            <h1>SELECT CATEGORY</h1>
+            <div>
+              어떤 것을 시도해 보고 싶으세요?<br />
+              관심 있는 카테고리를 선택하여<br />
+              결과를 확인해 보세요.
+            </div>
+          </div>
+          <div class="category">
+            <div class="c1"><a href="categoryPage.html">all</a></div>
+            <div class="c2"><a href="categoryPage.html">1</a></div>
+            <div class="c3"><a href="categoryPage.html">2</a></div>
+            <div class="c4"><a href="categoryPage.html">3</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 로고 클릭시 작아짐 클릭하지 않았을때는 다시 원상태
+      $("#logo").on({
+        click: function () {
+          $("#la>img").css({
+            width: "27px",
+            height: "auto",
+            "font-size": "15px",
+          });
+          $("#textLogo").css({
+            width: "27px",
+            height: "auto",
+            "font-size": "15px",
+          });
+        },
+      });
+    </script>
+
+    <script>
+      // 버튼 호버
+      $(function () {
+        $("#star, #hb1").hover(
+          function () {
+            $(this).css("background-color", "#ad081b");
+          },
+          function () {
+            $(this).css("background-color", "#f51f1f");
+          }
+        );
+
+        $("#hb2").hover(
+          function () {
+            $(this).css("backgroundColor", "#d0d0d0");
+          },
+          function () {
+            $(this).css("backgroundColor", "#f0f0f0");
+          }
+        );
+
+        // // hover시 밑줄
+        // $("#da>a").hover(function(){
+        //     $(this).css("text-decoration", "underline");
+        // },  function(){
+        //     $(this).css("text-decoration", "none");
+        // });
+
+        $(".c1, .c2, .c3, .c4").hover(
+          function () {
+            $(".category>div").css("border", "5px solid rgb(216, 54, 108)");
+          },
+          function () {
+            $(".category>div").css("border", "");
+          }
+        );
+        // div태그 클릭시 카테고리페이지로 이동
+        $(".c1, .c2, .c3, .c4").click(function () {
+          location.href = "categoryPage.html";
+        });
+
+        // menu버튼 클릭 후, 나오는 리스트 클릭시 배경색 진회색으로 변경
+        // $(".dropdown-item").click(function(){
+        //   $(this).css("background-color", "#D0D0D0")
+        // });
+      });
+    </script>
+
+    <br/>
+
+    <script>
+      $(".slickSlide").slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        draggable: false,
+        autoplay: false,
+        infinite: false,
+        vertical: true,
+        dots: false, // 테스트용 도트
+        nextArrow: $(".goCt"),
+        prevArrow: $(".prevNone"),
+        //  initialSlide: 0 => default
+      });
+
+      // 마우스 휠로 슬라이드 이동
+      $(".slickSlide").on("wheel", function (e) {
+        e.preventDefault();
+
+        if (e.originalEvent.deltaY < 0) {
+          $(this).slick("slickPrev");
+        } else {
+          $(this).slick("slickNext");
+        }
+      });
+
+      var f1b = document.getElementById("f1b");
+      setInterval(function () {
+        var color = Math.random() * 0xffffff;
+        color = parseInt(color);
+        color = color.toString(16);
+
+        f1b.style.background = "#" + color;
+      }, 3000);
+
+      $(".autoplay").slick({
+        slidesToShow: 4,
+        // slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        Infinity: true,
+        dots: false,
+        prevArrow: $(".prevArrow"),
+        nextArrow: $(".nextArrow"),
+        // ,
+        // appendDots: $(".dots")
+      });
+    </script>
+  </body>
+</html>

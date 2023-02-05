@@ -23,12 +23,6 @@ let setDefault = function () {
     localStorage.setItem('currentUser', JSON.stringify('userId1'));
     checkUserLogin();
   });
-
-  // 로그아웃
-  $('#hb2').click(function () {
-    localStorage.removeItem('currentUser');
-    checkUserLogin();
-  });
 };
 
 // ------------------  페이지 시작 시 실행시킬 메서드 모음 ----------------------------
