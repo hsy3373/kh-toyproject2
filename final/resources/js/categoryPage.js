@@ -2,18 +2,30 @@
 
 // 카테고리 목록 변경시 호출할 메서드, 현재 카테고리가 어떤건지 로컬스토리지 값도 변경
 let changeCategory = function (category) {
-  console.log('카테고리 준비중  ', category);
   localStorage.setItem('category', JSON.stringify(category));
 
-  // 매개변수로 받은 카테고리 클래스만 보이고 그 외 카테고리들은 none으로 숨기기
   $(`#content > .${category}`).css('display', 'grid');
   $('#content > *').not(`.${category}`).css('display', 'none');
 
-  // 즐겨찾기 메뉴와 그 외 카테고리들 구분하여 동작 실행
-  if (category === 'favorite') {
-    getFavoriteImg();
-  } else if ($(`#content > .${category}`).children().length < 1) {
+  if ($(`#content > .${category}`).children().length < 1) {
+    console.log('ㅅㄷㄴㅅㄷㄴㅅ');
     getImgesUnsplash(category);
+  }
+};
+
+// 현재 페이지에 접속한 방법 알아내는 메서드
+let getNavType = function () {
+  var navType = performance.getEntriesByType('navigation')[0].type;
+  console.log('네비 타입임 : ', navType, typeof navType);
+
+  if (navType === 'reload') {
+    console.log('리로드 됨');
+  } else if (navType === 'back_forward') {
+    console.log('뒤로가기로 옴');
+  } else if (navType === 'navigate') {
+    console.log('url로 옴');
+  } else {
+    console.log('방법 모름');
   }
 };
 
@@ -103,7 +115,7 @@ let getImgesUnsplash = function (category) {
     dataType: 'json',
     beforeSend: function (xhr) {
       $('.loadingAni').fadeIn(300);
-      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey2);
+      xhr.setRequestHeader('Authorization', 'Client-ID ' + unsplashKey1);
     },
     error: function (jqXHR) {
       console.log(jqXHR); //응답 메시지
@@ -294,13 +306,9 @@ let imgClickEvent = function () {
 // ------------------ 즐겨찾기 관련 메서드 구역 ----------------------------
 
 let getFavoriteImg = function () {
-  console.log('즐겨찾기 클릭됨');
   let uList = JSON.parse(localStorage.getItem('userList'));
   let cUser = JSON.parse(localStorage.getItem('currentUser'));
   let list = Object.values(uList[cUser].favorite);
-  console.log($('#myFavorites').children());
-  $('#myFavorites').empty();
-  console.log($('#myFavorites').children());
   if (list.length > 0) {
     for (let item of list) {
       if (item.type === 'picsum') {
@@ -323,23 +331,34 @@ let getFavoriteImg = function () {
 };
 
 $('#star').click(function () {
+  localStorage.setItem('category', JSON.stringify('favorite'));
+  $(`#content > .favorite`).css('display', 'grid');
+  $('#content > *').not(`.favorite`).css('display', 'none');
   $('.categoryName').removeClass('selectedCategory');
-  changeCategory('favorite');
+
+  getFavoriteImg();
 });
 
 // ------------------  페이지 시작 시 실행시킬 메서드 모음 ----------------------------
-let init = function () {
-  console.log('인잇');
-
-  if (!localStorage.getItem('currentUser')) {
-    location.href = 'index.html';
-    return;
+function init() {
+  getNavType();
+  // 현재 페이지에 로그인 된 유저 값 받아오기
+  let bUser = JSON.parse(localStorage.getItem('beforeUser'));
+  if (bUser) {
+    localStorage.setItem('currentUser', JSON.stringify(bUser));
+    localStorage.removeItem('beforeUser');
   }
+
+  $('#userId').text(JSON.parse(localStorage.getItem('currentUser')) + '님');
   // 페이지 첫 시작시 표시 카테고리 화면결정
   let currentC = JSON.parse(localStorage.getItem('category'));
   if (currentC) {
     $(`#${currentC}`).addClass('selectedCategory');
-    changeCategory(currentC);
+    if (currentC === 'favorite') {
+      getFavoriteImg();
+    } else {
+      changeCategory(currentC);
+    }
   } else {
     console.log('카테고리 값 없음');
   }
@@ -349,36 +368,61 @@ let init = function () {
 
   // 스크롤이 하단에 닿을때마다 페이지 수 증가시키며 이미지 불러오기
   $(window).scroll(function () {
-    let category = JSON.parse(localStorage.getItem('category'));
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-      getImgesUnsplash(category);
+      console.log(++scrollnum);
+      // getImgesUnsplash('random', $('.imgListWrap').children().length * 6);
+      // testtest();
+      getImgesPicsum(
+        scrollnum,
+        15,
+        JSON.parse(localStorage.getItem('category'))
+      );
     }
   });
 
   //스크롤 방지 해제
   $('html').css({ overflow: 'auto' });
-};
+}
 
 // -----------페이지 시작시 호출될 기본 동작 -------------
+
+/* 브라우저는 문서를 처음 로드시 load 이벤트 다음에 pageshow 이벤트를 발생시킴, 문서를 벗어날때는 pagehide
+  pageshow 이벤트의 경우 뒤로가기로 재진입한 경우에도 발생하는 이벤트이므로 
+  페이지가 열릴 때마다 수행되어야하는 코드가 있다면 이 이벤트에 바인딩하는 것이 더 바람직하다.
+  해당 이벤트 객체의 persisted 프로퍼티의 값은 페이지가 로드/새로고침이 아니라 복원되었을 경우에 true 임 - 그외는 false
+*/
+// 페이지가 뒤로가기로 인해 오게되었거나 새로고침 되었을 때 현재 유저 정보를 잃지 않기 위한 메서드
+window.onpageshow = function (event) {
+  if (
+    event.persisted ||
+    (window.performance &&
+      window.performance.getEntriesByType('navigation')[0].type ===
+        'back_forward')
+  ) {
+    console.log('Back button was pressed.');
+    localStorage.setItem('beforeUser', localStorage.getItem('currentUser'));
+  }
+};
 
 // 처음 윈도우 로드 시에 스크롤 방지
 $('html').css({ overflow: 'hidden' }); //로딩 중 스크롤 방지
 
-// 현재 유저 정보를 가져오는 로직이 userInfo.js 상 window.onload에 구현되어 있으므로
-// 유저 정보 가져온 이후에 기본 동작들을 호출하기 위해 window.onpageshow를 사용
-window.onpageshow = function () {
-  init();
-};
+// 스크롤 된 횟수 확인용 변수
+let scrollnum = 1;
+
+$(window).on('load', () => {
+  setTimeout(() => {
+    //  <-* 로딩속도 구현
+    // 윈도우가 모두 로드된 후 기본 메소드들을 실행시킨다
+    init();
+  }, 2000); //  <-* 로딩속도 구현
+});
 
 // ------------------ 페이지 css 관련 동작 구역 ---------------
 $('#logo').on({
   click: function () {
     $('#la>img').css({ width: '27px', height: 'auto' });
     $('#textLogo').css({ width: '27px', height: 'auto', 'font-size': '15px' });
-
-    let cUser = JSON.parse(localStorage.getItem('currentUser'));
-    localStorage.setItem('beforeUser', JSON.stringify(cUser));
-    location.href = 'index.html';
   },
 });
 
