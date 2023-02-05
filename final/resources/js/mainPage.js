@@ -27,12 +27,21 @@ $('#hb2').hover(
   }
 );
 
-$('.c1, .c2, .c3, .c4').hover(
+$('.category>div').hover(
   function () {
-    $('.category>div').css('border', '5px solid rgb(216, 54, 108)');
+    $(this).css({ border: '5px solid rgb(216, 54, 108)', 'z-index': '2' });
   },
   function () {
-    $('.category>div').css('border', '');
+    $(this).css({ border: '', 'z-index': '' });
+  }
+);
+
+$('.category>div').hover(
+  function () {
+    $('.category h4').addClass('hoverCt').css('visibility', 'visible');
+  },
+  function () {
+    $('.category h4').removeClass('hoverCt').css('visibility', 'hidden');
   }
 );
 
@@ -72,13 +81,15 @@ setInterval(function () {
 
 $('.autoplay').slick({
   slidesToShow: 4,
-  // slidesToScroll: 1,
+  slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000,
-  Infinity: true,
+  autoplaySpeed: 2700,
+  infinite: true,
   dots: false,
   prevArrow: $('.prevArrow'),
   nextArrow: $('.nextArrow'),
+  speed: 2200,
+  // cssEase: "linear",
   // ,
   // appendDots: $(".dots")
 });
