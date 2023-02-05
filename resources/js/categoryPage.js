@@ -13,9 +13,11 @@ let changeCategory = function (category) {
   if (category === 'favorite') {
     $(`body, #content`).css('background-color', '#525252');
     getFavoriteImg();
-  } else if ($(`#content > .${category}`).children().length < 1) {
+  } else {
     $(`body, #content`).css('background-color', '#d9d9d9');
-    getImgesUnsplash(category);
+    if ($(`#content > .${category}`).children().length < 1) {
+      getImgesUnsplash(category);
+    }
   }
 };
 
