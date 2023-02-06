@@ -115,7 +115,7 @@ let getImgesUnsplash = function (category, key) {
     error: function (jqXHR) {
       console.log(jqXHR); //응답 메시지
       if (key != unsplashKey2) {
-        getImgesUnsplash(img, unsplashKey2);
+        getImgesUnsplash(category, unsplashKey2);
       }
     },
   }).done(function (msg) {
@@ -199,7 +199,6 @@ let putImgPicsum = function (msg, category) {
 // 이미지 id 값으로 정보 불러온 후 모달창 팝업 시키는 메서드
 // Picsum 이미지용, Unsplash이미지용 두가지 존재
 let getOneImgePicsum = function (img) {
-  getOneImgeUnsplash;
   let id = $(img).attr("id");
   let favorClass = $(img).next().attr("class");
   $.ajax({
