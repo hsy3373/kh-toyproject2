@@ -90,8 +90,8 @@ Unsplash 객체 예시
 */
 
 // unsplash 전용 키
-let unsplashKey1 = "mYbJFdHIK1QDa64VC62UPAmPgk_vUamxwjRYLgCfwoQ";
-let unsplashKey2 = "3J7jbPUZmVp-2FW4FFIVkrC5Qn7JDa2mzjTzS7sgmiU";
+let unsplashKey1 = "DdupjOmqsFLJM715aoqKaNwOTg3DoTDlVX6kmMHT9jk";
+let unsplashKey2 = "0vljd_3IVQy3guaXeAHgo9VKYGSvFBWCaEuYkp4R89k";
 let unsplashKey3 = "-nwvkN9jP_iusw2zg2YbLPJFOPsTpJmRldNZhBoojXM";
 let unsplashKey4 = "8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k";
 
