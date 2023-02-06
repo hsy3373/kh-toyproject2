@@ -131,12 +131,12 @@ $("#loginForgot").click(function () {
 // --------------------------- 기존 회원 탈퇴 동작 -------------
 
 let openUserDelete = function () {
+  $("#loginForm, #loginForm2").css("display", "none");
   $("#secLogin").css("display", "block");
   // 로그인 화면상 마우스 휠이벤트 막기 -> 메인페이지 스크롤 막기 위함
   $("#secLogin").on("wheel", function (e) {
     return false;
   });
-  $("#loginForm, #loginForm2").css("display", "none");
 
   $("#loginForm3").css("display", "block");
 };

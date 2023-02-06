@@ -4,6 +4,9 @@ $("#logo").on({
   click: function () {
     $("#la>img").css({ width: "27px", height: "auto", "font-size": "15px" });
     $("#textLogo").css({ width: "27px", height: "auto", "font-size": "15px" });
+    let cUser = JSON.parse(localStorage.getItem("currentUser"));
+    localStorage.setItem("beforeUser", JSON.stringify(cUser));
+    location.href = "index.html";
   },
 });
 

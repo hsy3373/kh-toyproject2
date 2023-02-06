@@ -285,6 +285,49 @@ let downloadPic = function (url) {
   img.src = url;
 };
 
+// 회원탈퇴 구역
+$("#exit").click(function () {
+  let ulist = JSON.parse(localStorage.getItem("userList"));
+  let cUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (ulist && cUser) {
+    if (ulist[cUser]) {
+      let userPwdval = document.getElementById("outPassword").value;
+      var decrypt = CryptoJS.enc.Base64.parse(ulist[cUser].Pwd);
+      var hashData = decrypt.toString(CryptoJS.enc.Utf8);
+      if (userPwdval === hashData) {
+        delete ulist[cUser];
+        localStorage.setItem("userList", JSON.stringify(ulist));
+        alert("삭제 되었습니다.");
+        localStorage.removeItem("currentUser");
+        location.reload();
+      } else {
+        alert("비밀번호를 확인 해 주세요.");
+        return;
+      }
+    }
+  } else {
+    alert("회원가입부터 해주세요.");
+    return;
+  }
+});
+
+// 회원탈퇴 구역
+$("#cancle").click(function () {
+  $("#secLogin").css("display", "none");
+  // $("#bg").css("display", "none");
+});
+
+// 회원 탈퇴창 팝업
+let openUserDelete = function () {
+  $("#secLogin").css("display", "block");
+  // 로그인 화면상 마우스 휠이벤트 막기 -> 메인페이지 스크롤 막기 위함
+  $("#secLogin").on("wheel", function (e) {
+    return false;
+  });
+
+  $("#loginForm3").css("display", "block");
+};
+
 // 이미지, 모달창 관련 이벤트 할당
 let imgClickEvent = function () {
   // 이미지 클릭 시 아이디 값 가져와서 해당 사이트에서 아이디값으로 검색 가능함
@@ -327,6 +370,10 @@ let imgClickEvent = function () {
       console.log(err);
       toast("복사에 실패하였습니다");
     }
+  });
+
+  $("#deleteUser").on("click", function () {
+    openUserDelete();
   });
 };
 
