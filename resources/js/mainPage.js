@@ -108,8 +108,8 @@ $(".autoplay").slick({
 
 // ---------메인 페이지 이미지 관련----------------
 
-let unsplashKey1 = "DdupjOmqsFLJM715aoqKaNwOTg3DoTDlVX6kmMHT9jk";
-let unsplashKey2 = "0vljd_3IVQy3guaXeAHgo9VKYGSvFBWCaEuYkp4R89k";
+let unsplashKey1 = "ymLgpTzSXHOd9K4R04jLC0ZVmY8Xms488ggylOkTlwQ";
+let unsplashKey2 = "6hB5RpIrpfTk753-kTFdpRxuYMZ34OdgGyFV8LHILtY";
 let unsplashKey3 = "-nwvkN9jP_iusw2zg2YbLPJFOPsTpJmRldNZhBoojXM";
 let unsplashKey4 = "8f8MJ6PUF8d_TQPhyNFoow_r8dZXUXojqWuT1oBEw5k";
 
