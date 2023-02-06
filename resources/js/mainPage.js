@@ -48,6 +48,15 @@ $(".category>div").hover(
   }
 );
 
+$('#f1b').hover(
+  function (){
+   $(this).addClass('transYb');
+ },
+ function(){
+  $(this).removeClass('transYb');
+ }
+)
+
 // ------------------------slickSlide 구역-------------------------------
 $(".slickSlide").slick({
   slidesToShow: 1,
