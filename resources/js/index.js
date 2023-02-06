@@ -1,26 +1,31 @@
 // -------------- 현재 유저 값에 따라 로그인 창 열고/닫기 -------------
 
 let checkUserLogin = function () {
-  let cUser = JSON.parse(localStorage.getItem('currentUser'));
+  $("#loginForm2, #loginForm3").css("display", "none");
+  console.log("유저 체크중");
+  let cUser = JSON.parse(localStorage.getItem("currentUser"));
   if (cUser) {
-    $('#secLogin').css('display', 'none');
-    $('#userId').text(`${cUser}님`);
-    $('#welcome').css({ visibility: 'visible' });
+    $("#secLogin").css("display", "none");
+    $("#userId").text(`${cUser}님`);
+    $("#welcome").css({ visibility: "visible" });
   } else {
-    $('#welcome').css({ visibility: 'hidden' });
+    $("#welcome").css({ visibility: "hidden" });
 
-    $('#secLogin').css('display', 'block');
+    $("#loginForm2, #loginForm3").css("display", "none");
+    $("#secLogin").css("display", "block");
+    $("#loginForm").css("display", "block");
+
     // 로그인 화면상 마우스 휠이벤트 막기 -> 메인페이지 스크롤 막기 위함
-    $('#secLogin').on('wheel', function (e) {
+    $("#secLogin").on("wheel", function (e) {
       return false;
     });
   }
 };
 
 let setDefault = function () {
-  $('#loginBtn').click(function () {
+  $("#loginBtn").click(function () {
     // 테스트 위해서 로그인 버튼 클릭시 자동으로 현재 유저값 저장됨
-    localStorage.setItem('currentUser', JSON.stringify('userId1'));
+    localStorage.setItem("currentUser", JSON.stringify("userId1"));
     checkUserLogin();
   });
 };
@@ -28,7 +33,7 @@ let setDefault = function () {
 // ------------------  페이지 시작 시 실행시킬 메서드 모음 ----------------------------
 let init = function () {
   checkUserLogin();
-  setDefault();
+  // setDefault();
 };
 
 // -----------페이지 시작시 호출될 기본 동작 -------------

@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+
 #c2 img {
   max-width: 90%;
   width: 70%;
