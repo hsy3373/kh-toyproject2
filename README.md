@@ -1,1 +1,1 @@
-# pinterest clone project
+# Pinterest clone project
